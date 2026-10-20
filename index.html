@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -543,11 +542,15 @@
         contrasena.value = "";
 
         mostrarMensaje(
-          "¡Acceso verificado correctamente! El panel de administración se conectará en el siguiente paso.",
+          "¡Acceso verificado correctamente! Entrando al panel...",
           "exito"
         );
 
-        botonIngresar.textContent = "ACCESO VERIFICADO";
+        botonIngresar.textContent = "ENTRANDO AL PANEL...";
+
+        window.setTimeout(() => {
+          window.location.href = "./panel.html";
+        }, 700);
 
       } catch (error) {
         mostrarMensaje(
