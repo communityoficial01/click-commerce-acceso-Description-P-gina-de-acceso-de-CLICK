@@ -1,0 +1,766 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel de Administración | CLICK COMMERCE</title>
+
+  <style>
+    :root {
+      --azul: #0B1F3A;
+      --azul-claro: #15365D;
+      --dorado: #D9B45B;
+      --fondo: #F3F5F8;
+      --blanco: #FFFFFF;
+      --texto: #172337;
+      --gris: #738096;
+      --borde: #DCE2EA;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body, button {
+      font-family: "Times New Roman", Times, serif;
+    }
+
+    body {
+      margin: 0;
+      background: var(--fondo);
+      color: var(--texto);
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    .app {
+      min-height: 100vh;
+      display: flex;
+    }
+
+    .sidebar {
+      width: 255px;
+      flex-shrink: 0;
+      background: var(--azul);
+      color: white;
+      padding: 25px 16px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 0 8px 25px;
+      border-bottom: 1px solid rgba(255,255,255,.16);
+    }
+
+    .logo {
+      width: 48px;
+      height: 48px;
+      flex-shrink: 0;
+      border: 1px solid var(--dorado);
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      color: var(--dorado);
+      font-size: 12px;
+      text-align: center;
+    }
+
+    .brand h1 {
+      margin: 0;
+      font-size: 20px;
+      color: white;
+    }
+
+    .brand p {
+      margin: 5px 0 0;
+      font-size: 12px;
+      color: #D6DCE6;
+    }
+
+    .menu-label {
+      margin: 25px 10px 10px;
+      color: #B7C3D4;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .nav {
+      display: grid;
+      gap: 5px;
+    }
+
+    .nav button {
+      width: 100%;
+      padding: 12px 13px;
+      display: flex;
+      gap: 11px;
+      align-items: center;
+      text-align: left;
+      color: #E5EAF2;
+      background: transparent;
+      border: 1px solid transparent;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    .nav button:hover,
+    .nav button.active {
+      background: var(--azul-claro);
+      border-color: rgba(217,180,91,.4);
+      color: var(--dorado);
+    }
+
+    .nav-icon {
+      width: 22px;
+      text-align: center;
+      font-size: 18px;
+    }
+
+    .sidebar-bottom {
+      margin-top: auto;
+      padding: 20px 8px 0;
+      border-top: 1px solid rgba(255,255,255,.16);
+    }
+
+    .admin-label {
+      color: #D7DFEA;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .admin-label strong {
+      color: var(--dorado);
+      display: block;
+      font-size: 16px;
+    }
+
+    .main {
+      min-width: 0;
+      flex: 1;
+    }
+
+    .topbar {
+      background: white;
+      min-height: 82px;
+      padding: 18px 30px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      border-bottom: 1px solid var(--borde);
+    }
+
+    .topbar h2 {
+      margin: 0;
+      font-size: 24px;
+      color: var(--azul);
+    }
+
+    .topbar p {
+      margin: 5px 0 0;
+      color: var(--gris);
+      font-size: 14px;
+    }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .status {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 14px;
+      color: #41634D;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #4E9A68;
+    }
+
+    .logout {
+      border: 1px solid var(--borde);
+      border-radius: 7px;
+      padding: 9px 13px;
+      background: white;
+      color: var(--azul);
+      font-size: 14px;
+    }
+
+    .content {
+      padding: 28px 30px;
+      max-width: 1500px;
+      margin: 0 auto;
+    }
+
+    .welcome {
+      background: var(--azul);
+      color: white;
+      border-radius: 12px;
+      padding: 26px 28px;
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 25px;
+    }
+
+    .welcome::after {
+      content: "";
+      position: absolute;
+      width: 180px;
+      height: 180px;
+      border: 24px solid rgba(217,180,91,.15);
+      border-radius: 50%;
+      right: -35px;
+      top: -65px;
+    }
+
+    .welcome h3 {
+      margin: 0 0 9px;
+      font-size: 27px;
+      color: var(--dorado);
+    }
+
+    .welcome p {
+      margin: 0;
+      color: #E1E7EF;
+      font-size: 16px;
+      line-height: 1.5;
+      max-width: 650px;
+    }
+
+    .section-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin: 28px 0 16px;
+    }
+
+    .section-heading h3 {
+      margin: 0;
+      color: var(--azul);
+      font-size: 21px;
+    }
+
+    .section-heading p {
+      color: var(--gris);
+      font-size: 14px;
+      margin: 5px 0 0;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .stat-card {
+      background: white;
+      padding: 20px;
+      border: 1px solid var(--borde);
+      border-radius: 10px;
+      min-height: 135px;
+    }
+
+    .stat-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .stat-title {
+      color: var(--gris);
+      font-size: 15px;
+    }
+
+    .stat-icon {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      border-radius: 9px;
+      background: #F8F2E4;
+      color: var(--azul);
+      font-size: 20px;
+    }
+
+    .stat-value {
+      margin-top: 18px;
+      color: var(--azul);
+      font-size: 21px;
+      font-weight: bold;
+    }
+
+    .stat-note {
+      margin-top: 6px;
+      color: var(--gris);
+      font-size: 13px;
+    }
+
+    .module-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .module {
+      background: white;
+      border: 1px solid var(--borde);
+      border-radius: 10px;
+      padding: 21px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      min-height: 185px;
+    }
+
+    .module-icon {
+      width: 43px;
+      height: 43px;
+      display: grid;
+      place-items: center;
+      background: var(--azul);
+      color: var(--dorado);
+      border-radius: 10px;
+      font-size: 22px;
+      margin-bottom: 15px;
+    }
+
+    .module h4 {
+      margin: 0 0 8px;
+      color: var(--azul);
+      font-size: 19px;
+    }
+
+    .module p {
+      color: var(--gris);
+      font-size: 14px;
+      line-height: 1.5;
+      margin: 0 0 16px;
+    }
+
+    .module button {
+      margin-top: auto;
+      border: 0;
+      background: transparent;
+      color: #8A681B;
+      padding: 0;
+      font-size: 15px;
+      font-weight: bold;
+    }
+
+    .module button:hover {
+      text-decoration: underline;
+    }
+
+    .notice {
+      background: white;
+      border: 1px solid var(--borde);
+      border-left: 4px solid var(--dorado);
+      border-radius: 8px;
+      padding: 17px 20px;
+      margin-top: 24px;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .notice strong {
+      color: var(--azul);
+    }
+
+    .placeholder {
+      background: white;
+      border: 1px solid var(--borde);
+      border-radius: 10px;
+      padding: 28px;
+      min-height: 220px;
+    }
+
+    .placeholder h3 {
+      color: var(--azul);
+      font-size: 23px;
+      margin-top: 0;
+    }
+
+    .placeholder p {
+      color: var(--gris);
+      line-height: 1.6;
+    }
+
+    .back-home {
+      margin-top: 12px;
+      border: 1px solid var(--dorado);
+      background: var(--azul);
+      color: white;
+      padding: 11px 16px;
+      border-radius: 7px;
+      font-size: 15px;
+    }
+
+    .footer {
+      color: var(--gris);
+      text-align: center;
+      font-size: 13px;
+      padding: 28px 10px 12px;
+    }
+
+    @media (max-width: 1100px) {
+      .cards {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .module-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 760px) {
+      .app {
+        display: block;
+      }
+
+      .sidebar {
+        width: 100%;
+        padding: 16px;
+      }
+
+      .brand {
+        padding-bottom: 16px;
+      }
+
+      .menu-label {
+        margin-top: 16px;
+      }
+
+      .nav {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .nav button {
+        font-size: 14px;
+        padding: 10px 8px;
+      }
+
+      .sidebar-bottom {
+        margin-top: 17px;
+        padding-top: 13px;
+      }
+
+      .topbar {
+        padding: 16px;
+        align-items: flex-start;
+      }
+
+      .topbar h2 {
+        font-size: 21px;
+      }
+
+      .top-actions {
+        align-items: flex-end;
+        flex-direction: column;
+      }
+
+      .content {
+        padding: 18px 14px;
+      }
+
+      .welcome {
+        padding: 22px 20px;
+      }
+
+      .welcome h3 {
+        font-size: 23px;
+      }
+
+      .cards,
+      .module-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="logo">TU<br>LOGO</div>
+        <div>
+          <h1>CLICK COMMERCE</h1>
+          <p>Gestión empresarial</p>
+        </div>
+      </div>
+
+      <div class="menu-label">Menú principal</div>
+
+      <nav class="nav" id="menu">
+        <button class="active" data-section="inicio">
+          <span class="nav-icon">⌂</span> Inicio
+        </button>
+        <button data-section="empresas">
+          <span class="nav-icon">▦</span> Empresas
+        </button>
+        <button data-section="catalogos">
+          <span class="nav-icon">▤</span> Catálogos
+        </button>
+        <button data-section="contratos">
+          <span class="nav-icon">▧</span> Contratos
+        </button>
+        <button data-section="pagos">
+          <span class="nav-icon">$</span> Pagos y mensualidades
+        </button>
+        <button data-section="finanzas">
+          <span class="nav-icon">◫</span> Finanzas
+        </button>
+        <button data-section="usuarios">
+          <span class="nav-icon">♙</span> Usuarios y permisos
+        </button>
+        <button data-section="historial">
+          <span class="nav-icon">◷</span> Historial
+        </button>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <div class="admin-label">
+          Sesión de trabajo
+          <strong>Superadministradora</strong>
+          CLICK COMMERCE
+        </div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div>
+          <h2 id="pageTitle">Panel principal</h2>
+          <p>Centro de control de la plataforma</p>
+        </div>
+
+        <div class="top-actions">
+          <div class="status">
+            <span class="status-dot"></span>
+            Panel de demostración
+          </div>
+          <button class="logout" id="logout">Volver al acceso</button>
+        </div>
+      </header>
+
+      <div class="content" id="content">
+        <section class="welcome">
+          <h3>Bienvenida a CLICK COMMERCE</h3>
+          <p>
+            Administra desde un solo lugar las empresas, sus catálogos,
+            los servicios contratados y el control de pagos.
+            Esta plataforma está diseñada para crecer contigo.
+          </p>
+        </section>
+
+        <div class="section-heading">
+          <div>
+            <h3>Resumen general</h3>
+            <p>Los indicadores se mostrarán cuando conectemos la base de datos.</p>
+          </div>
+        </div>
+
+        <div class="cards">
+          <article class="stat-card">
+            <div class="stat-top">
+              <span class="stat-title">Empresas registradas</span>
+              <span class="stat-icon">▦</span>
+            </div>
+            <div class="stat-value">Por conectar</div>
+            <div class="stat-note">Datos de Supabase</div>
+          </article>
+
+          <article class="stat-card">
+            <div class="stat-top">
+              <span class="stat-title">Catálogos activos</span>
+              <span class="stat-icon">▤</span>
+            </div>
+            <div class="stat-value">Por conectar</div>
+            <div class="stat-note">Datos de Supabase</div>
+          </article>
+
+          <article class="stat-card">
+            <div class="stat-top">
+              <span class="stat-title">Pagos pendientes</span>
+              <span class="stat-icon">$</span>
+            </div>
+            <div class="stat-value">Por conectar</div>
+            <div class="stat-note">Control de vencimientos</div>
+          </article>
+
+          <article class="stat-card">
+            <div class="stat-top">
+              <span class="stat-title">Ingresos registrados</span>
+              <span class="stat-icon">◫</span>
+            </div>
+            <div class="stat-value">Por conectar</div>
+            <div class="stat-note">Resumen financiero</div>
+          </article>
+        </div>
+
+        <div class="section-heading">
+          <div>
+            <h3>Módulos de administración</h3>
+            <p>Selecciona una sección para conocer su función.</p>
+          </div>
+        </div>
+
+        <div class="module-grid">
+          <article class="module">
+            <div class="module-icon">▦</div>
+            <h4>Empresas</h4>
+            <p>Registrar empresas, actualizar sus datos y controlar su estado.</p>
+            <button data-open="empresas">Abrir sección →</button>
+          </article>
+
+          <article class="module">
+            <div class="module-icon">▤</div>
+            <h4>Catálogos y servicios</h4>
+            <p>Gestionar catálogos, servicios contratados y su estado de publicación.</p>
+            <button data-open="catalogos">Abrir sección →</button>
+          </article>
+
+          <article class="module">
+            <div class="module-icon">▧</div>
+            <h4>Contratos</h4>
+            <p>Consultar condiciones comerciales, entregas y acuerdos con cada empresa.</p>
+            <button data-open="contratos">Abrir sección →</button>
+          </article>
+
+          <article class="module">
+            <div class="module-icon">$</div>
+            <h4>Pagos y mensualidades</h4>
+            <p>Controlar anticipos, saldos, vencimientos y mensualidades.</p>
+            <button data-open="pagos">Abrir sección →</button>
+          </article>
+
+          <article class="module">
+            <div class="module-icon">◫</div>
+            <h4>Finanzas</h4>
+            <p>Organizar ingresos, gastos, resultados y reportes financieros.</p>
+            <button data-open="finanzas">Abrir sección →</button>
+          </article>
+
+          <article class="module">
+            <div class="module-icon">♙</div>
+            <h4>Usuarios y permisos</h4>
+            <p>Administrar accesos y permisos para cada empresa y colaborador.</p>
+            <button data-open="usuarios">Abrir sección →</button>
+          </article>
+
+          <article class="module">
+            <div class="module-icon">◷</div>
+            <h4>Historial de movimientos</h4>
+            <p>Consultar cambios realizados, fechas y usuarios responsables.</p>
+            <button data-open="historial">Abrir sección →</button>
+          </article>
+        </div>
+
+        <div class="notice">
+          <strong>Importante:</strong> este es el diseño inicial del panel.
+          No introduzcas datos reales todavía. Primero conectaremos las
+          secciones con Supabase y verificaremos los permisos de acceso.
+        </div>
+
+        <div class="footer">
+          © 2026 CLICK COMMERCE · Plataforma de gestión empresarial
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    const titles = {
+      inicio: "Panel principal",
+      empresas: "Gestión de empresas",
+      catalogos: "Catálogos y servicios",
+      contratos: "Contratos",
+      pagos: "Pagos y mensualidades",
+      finanzas: "Control financiero",
+      usuarios: "Usuarios y permisos",
+      historial: "Historial de movimientos"
+    };
+
+    const descriptions = {
+      empresas: "Aquí prepararemos el registro, edición, activación y seguimiento de las empresas que administras.",
+      catalogos: "Aquí organizaremos los catálogos, los servicios contratados y el estado de cada proyecto.",
+      contratos: "Aquí registraremos las condiciones acordadas, las fechas de entrega y la aprobación del catálogo.",
+      pagos: "Aquí controlaremos el anticipo, el saldo de entrega y las mensualidades a partir de la entrega y aprobación del catálogo, según las reglas comerciales acordadas.",
+      finanzas: "Aquí prepararemos los ingresos, gastos, resultados y reportes para conocer el rendimiento de CLICK COMMERCE.",
+      usuarios: "Aquí administraremos las cuentas, los roles y los permisos de cada empresa y colaborador.",
+      historial: "Aquí consultaremos quién realizó cada cambio y cuándo se hizo."
+    };
+
+    function showSection(section) {
+      const content = document.getElementById("content");
+      document.getElementById("pageTitle").textContent =
+        titles[section] || titles.inicio;
+
+      document.querySelectorAll("#menu button").forEach(button => {
+        button.classList.toggle(
+          "active",
+          button.dataset.section === section
+        );
+      });
+
+      if (section === "inicio") {
+        location.reload();
+        return;
+      }
+
+      content.innerHTML = `
+        <section class="placeholder">
+          <h3>${titles[section]}</h3>
+          <p>${descriptions[section]}</p>
+          <p>
+            Esta sección todavía no está conectada a la base de datos.
+            La habilitaremos paso a paso, con los permisos adecuados.
+          </p>
+          <button class="back-home" id="backHome">
+            Volver al panel principal
+          </button>
+        </section>
+        <div class="footer">
+          © 2026 CLICK COMMERCE · Gestión empresarial
+        </div>
+      `;
+
+      document.getElementById("backHome").addEventListener("click", () => {
+        location.reload();
+      });
+    }
+
+    document.querySelectorAll("#menu button").forEach(button => {
+      button.addEventListener("click", () => {
+        showSection(button.dataset.section);
+      });
+    });
+
+    document.querySelectorAll("[data-open]").forEach(button => {
+      button.addEventListener("click", () => {
+        showSection(button.dataset.open);
+      });
+    });
+
+    document.getElementById("logout").addEventListener("click", () => {
+      window.location.href = "./";
+    });
+  </script>
+</body>
+</html>
