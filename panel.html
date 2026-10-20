@@ -1,12 +1,15 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0B1F3A">
+  <meta name="description" content="Panel de administración de CLICK COMMERCE">
   <title>Panel de Administración | CLICK COMMERCE</title>
 
   <style>
-    :root { 
+    :root {
       --azul: #0B1F3A;
       --azul-claro: #15365D;
       --dorado: #D9B45B;
@@ -15,11 +18,11 @@
       --texto: #172337;
       --gris: #738096;
       --borde: #DCE2EA;
+      --verde: #287545;
+      --rojo: #A52A2A;
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     html, body, button {
       font-family: "Times New Roman", Times, serif;
@@ -31,8 +34,11 @@
       color: var(--texto);
     }
 
-    button {
-      cursor: pointer;
+    button { cursor: pointer; }
+
+    button:disabled {
+      cursor: not-allowed;
+      opacity: .6;
     }
 
     .app {
@@ -55,7 +61,7 @@
       align-items: center;
       gap: 12px;
       padding: 0 8px 25px;
-      border-bottom: 1px solid rgba(255,255,255,.16);
+      border-bottom: 1px solid #ffffff29;
     }
 
     .logo {
@@ -113,7 +119,7 @@
     .nav button:hover,
     .nav button.active {
       background: var(--azul-claro);
-      border-color: rgba(217,180,91,.4);
+      border-color: #D9B45B66;
       color: var(--dorado);
     }
 
@@ -126,13 +132,14 @@
     .sidebar-bottom {
       margin-top: auto;
       padding: 20px 8px 0;
-      border-top: 1px solid rgba(255,255,255,.16);
+      border-top: 1px solid #ffffff29;
     }
 
     .admin-label {
       color: #D7DFEA;
       font-size: 13px;
       line-height: 1.5;
+      overflow-wrap: anywhere;
     }
 
     .admin-label strong {
@@ -180,15 +187,19 @@
       align-items: center;
       gap: 7px;
       font-size: 14px;
-      color: #41634D;
+      color: var(--gris);
     }
 
     .status-dot {
       width: 8px;
       height: 8px;
       border-radius: 50%;
-      background: #4E9A68;
+      background: var(--dorado);
+      flex-shrink: 0;
     }
+
+    .status-dot.ok { background: #4E9A68; }
+    .status-dot.error { background: #C43B3B; }
 
     .logout {
       border: 1px solid var(--borde);
@@ -220,10 +231,11 @@
       position: absolute;
       width: 180px;
       height: 180px;
-      border: 24px solid rgba(217,180,91,.15);
+      border: 24px solid #D9B45B26;
       border-radius: 50%;
       right: -35px;
       top: -65px;
+      pointer-events: none;
     }
 
     .welcome h3 {
@@ -362,9 +374,7 @@
       font-weight: bold;
     }
 
-    .module button:hover {
-      text-decoration: underline;
-    }
+    .module button:hover { text-decoration: underline; }
 
     .notice {
       background: white;
@@ -377,9 +387,7 @@
       line-height: 1.6;
     }
 
-    .notice strong {
-      color: var(--azul);
-    }
+    .notice strong { color: var(--azul); }
 
     .placeholder {
       background: white;
@@ -417,87 +425,102 @@
       padding: 28px 10px 12px;
     }
 
-    @media (max-width: 1100px) {
-      .cards {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
+    /* Pantalla de verificación de acceso */
+    .guardia {
+      position: fixed;
+      inset: 0;
+      z-index: 100000;
+      background: var(--azul);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 22px;
+    }
 
-      .module-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
+    .guardia[hidden] { display: none; }
+
+    .guardia-card {
+      width: min(460px, 100%);
+      padding: 30px;
+      border: 1px solid var(--dorado);
+      border-radius: 14px;
+      background: #102947;
+      text-align: center;
+    }
+
+    .guardia-card h1 {
+      color: var(--dorado);
+      font-size: 25px;
+      margin: 0 0 14px;
+    }
+
+    .guardia-card p {
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-wrap: anywhere;
+    }
+
+    .guardia-boton {
+      margin-top: 12px;
+      padding: 11px 18px;
+      border: 0;
+      border-radius: 7px;
+      background: var(--dorado);
+      color: var(--azul);
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    .guardia-mensaje { color: #E7EDF5; }
+    .guardia-error { color: #FFB3B3; }
+    .guardia-ok { color: #9EE6AE; }
+
+    @media (max-width: 1100px) {
+      .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .module-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
 
     @media (max-width: 760px) {
-      .app {
-        display: block;
-      }
-
-      .sidebar {
-        width: 100%;
-        padding: 16px;
-      }
-
-      .brand {
-        padding-bottom: 16px;
-      }
-
-      .menu-label {
-        margin-top: 16px;
-      }
-
-      .nav {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .nav button {
-        font-size: 14px;
-        padding: 10px 8px;
-      }
-
-      .sidebar-bottom {
-        margin-top: 17px;
-        padding-top: 13px;
-      }
-
-      .topbar {
-        padding: 16px;
-        align-items: flex-start;
-      }
-
-      .topbar h2 {
-        font-size: 21px;
-      }
-
-      .top-actions {
-        align-items: flex-end;
-        flex-direction: column;
-      }
-
-      .content {
-        padding: 18px 14px;
-      }
-
-      .welcome {
-        padding: 22px 20px;
-      }
-
-      .welcome h3 {
-        font-size: 23px;
-      }
-
-      .cards,
-      .module-grid {
-        grid-template-columns: 1fr;
-      }
+      .app { display: block; }
+      .sidebar { width: 100%; padding: 16px; }
+      .brand { padding-bottom: 16px; }
+      .menu-label { margin-top: 16px; }
+      .nav { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .nav button { font-size: 14px; padding: 10px 8px; }
+      .sidebar-bottom { margin-top: 17px; padding-top: 13px; }
+      .topbar { padding: 16px; align-items: flex-start; }
+      .topbar h2 { font-size: 21px; }
+      .top-actions { align-items: flex-end; flex-direction: column; }
+      .content { padding: 18px 14px; }
+      .welcome { padding: 22px 20px; }
+      .welcome h3 { font-size: 23px; }
+      .cards, .module-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 
 <body>
-  <div class="app">
+  <!-- Esta pantalla bloquea el panel hasta verificar sesión y rol. -->
+  <div class="guardia" id="ccGuardia">
+    <div class="guardia-card">
+      <h1>CLICK COMMERCE</h1>
+      <p class="guardia-mensaje" id="ccGuardiaMensaje">
+        Verificando tu sesión y los permisos de acceso...
+      </p>
+      <button class="guardia-boton" id="ccReintentar" hidden>
+        Volver a verificar
+      </button>
+      <button class="guardia-boton" id="ccVolverAcceso" hidden>
+        Volver al acceso
+      </button>
+    </div>
+  </div>
+
+  <div class="app" id="ccAplicacion" hidden>
     <aside class="sidebar">
       <div class="brand">
-        <div class="logo">TU<br>LOGO</div>
+        <div class="logo">CLICK<br>COMMERCE</div>
         <div>
           <h1>CLICK COMMERCE</h1>
           <p>Gestión empresarial</p>
@@ -536,8 +559,8 @@
       <div class="sidebar-bottom">
         <div class="admin-label">
           Sesión de trabajo
-          <strong>Superadministradora</strong>
-          CLICK COMMERCE
+          <strong id="ccNombreRol">Superadministradora</strong>
+          <span id="ccIdentidad">CLICK COMMERCE</span>
         </div>
       </div>
     </aside>
@@ -551,8 +574,8 @@
 
         <div class="top-actions">
           <div class="status">
-            <span class="status-dot"></span>
-            Panel de demostración
+            <span class="status-dot" id="ccPuntoEstado"></span>
+            <span id="ccEstadoPanel">Acceso verificado</span>
           </div>
           <button class="logout" id="logout">Volver al acceso</button>
         </div>
@@ -571,7 +594,7 @@
         <div class="section-heading">
           <div>
             <h3>Resumen general</h3>
-            <p>Los indicadores se mostrarán cuando conectemos la base de datos.</p>
+            <p>Los indicadores se actualizarán cuando conectemos cada módulo.</p>
           </div>
         </div>
 
@@ -631,14 +654,14 @@
           <article class="module">
             <div class="module-icon">▤</div>
             <h4>Catálogos y servicios</h4>
-            <p>Gestionar catálogos, servicios contratados y su estado de publicación.</p>
+            <p>Gestionar catálogos, servicios contratados y su publicación.</p>
             <button data-open="catalogos">Abrir sección →</button>
           </article>
 
           <article class="module">
             <div class="module-icon">▧</div>
             <h4>Contratos</h4>
-            <p>Consultar condiciones comerciales, entregas y acuerdos con cada empresa.</p>
+            <p>Consultar condiciones comerciales, entregas y acuerdos.</p>
             <button data-open="contratos">Abrir sección →</button>
           </article>
 
@@ -659,22 +682,22 @@
           <article class="module">
             <div class="module-icon">♙</div>
             <h4>Usuarios y permisos</h4>
-            <p>Administrar accesos y permisos para cada empresa y colaborador.</p>
+            <p>Administrar accesos y permisos para empresas y colaboradores.</p>
             <button data-open="usuarios">Abrir sección →</button>
           </article>
 
           <article class="module">
             <div class="module-icon">◷</div>
             <h4>Historial de movimientos</h4>
-            <p>Consultar cambios realizados, fechas y usuarios responsables.</p>
+            <p>Consultar cambios, fechas y usuarios responsables.</p>
             <button data-open="historial">Abrir sección →</button>
           </article>
         </div>
 
         <div class="notice">
-          <strong>Importante:</strong> este es el diseño inicial del panel.
-          No introduzcas datos reales todavía. Primero conectaremos las
-          secciones con Supabase y verificaremos los permisos de acceso.
+          <strong>Estado de la plataforma:</strong>
+          la sesión y el rol se verifican antes de mostrar el panel.
+          Los módulos de gestión todavía se conectarán individualmente.
         </div>
 
         <div class="footer">
@@ -685,179 +708,252 @@
   </div>
 
   <script>
-    const titles = {
-      inicio: "Panel principal",
-      empresas: "Gestión de empresas",
-      catalogos: "Catálogos y servicios",
-      contratos: "Contratos",
-      pagos: "Pagos y mensualidades",
-      finanzas: "Control financiero",
-      usuarios: "Usuarios y permisos",
-      historial: "Historial de movimientos"
-    };
+    (() => {
+      "use strict";
 
-    const descriptions = {
-      empresas: "Aquí prepararemos el registro, edición, activación y seguimiento de las empresas que administras.",
-      catalogos: "Aquí organizaremos los catálogos, los servicios contratados y el estado de cada proyecto.",
-      contratos: "Aquí registraremos las condiciones acordadas, las fechas de entrega y la aprobación del catálogo.",
-      pagos: "Aquí controlaremos el anticipo, el saldo de entrega y las mensualidades a partir de la entrega y aprobación del catálogo, según las reglas comerciales acordadas.",
-      finanzas: "Aquí prepararemos los ingresos, gastos, resultados y reportes para conocer el rendimiento de CLICK COMMERCE.",
-      usuarios: "Aquí administraremos las cuentas, los roles y los permisos de cada empresa y colaborador.",
-      historial: "Aquí consultaremos quién realizó cada cambio y cuándo se hizo."
-    };
+      const SUPABASE_URL = "https://dqannkyvzthcycbiuacs.supabase.co";
+      const SUPABASE_KEY = "sb_publishable_b6D0Dbn9tY4tyFSXqYjuNg_cq1Rm3xD";
 
-    function showSection(section) {
-      const content = document.getElementById("content");
-      document.getElementById("pageTitle").textContent =
-        titles[section] || titles.inicio;
+      const guardia = document.getElementById("ccGuardia");
+      const mensajeGuardia = document.getElementById("ccGuardiaMensaje");
+      const botonReintentar = document.getElementById("ccReintentar");
+      const botonVolver = document.getElementById("ccVolverAcceso");
+      const aplicacion = document.getElementById("ccAplicacion");
 
-      document.querySelectorAll("#menu button").forEach(button => {
-        button.classList.toggle(
-          "active",
-          button.dataset.section === section
-        );
-      });
+      const titulos = {
+        inicio: "Panel principal",
+        empresas: "Gestión de empresas",
+        catalogos: "Catálogos y servicios",
+        contratos: "Contratos",
+        pagos: "Pagos y mensualidades",
+        finanzas: "Control financiero",
+        usuarios: "Usuarios y permisos",
+        historial: "Historial de movimientos"
+      };
 
-      if (section === "inicio") {
-        location.reload();
-        return;
+      const descripciones = {
+        empresas:
+          "Aquí prepararemos el registro, la edición y el seguimiento de las empresas que administras.",
+        catalogos:
+          "Aquí organizaremos los catálogos, los servicios contratados y el estado de cada proyecto.",
+        contratos:
+          "Aquí registraremos las condiciones acordadas, las fechas de entrega y la aprobación del catálogo.",
+        pagos:
+          "Aquí controlaremos el anticipo, el saldo de entrega y las mensualidades a partir de la entrega y aprobación del catálogo, según las reglas comerciales acordadas.",
+        finanzas:
+          "Aquí prepararemos los ingresos, gastos, resultados y reportes financieros de CLICK COMMERCE.",
+        usuarios:
+          "Aquí administraremos las cuentas, los roles y los permisos de cada empresa y colaborador.",
+        historial:
+          "Aquí consultaremos quién realizó cada cambio y cuándo se hizo."
+      };
+
+      function mostrarError(mensaje, permitirReintento = true) {
+        aplicacion.hidden = true;
+        guardia.hidden = false;
+
+        mensajeGuardia.className = "guardia-mensaje guardia-error";
+        mensajeGuardia.textContent = mensaje;
+
+        botonReintentar.hidden = !permitirReintento;
+        botonVolver.hidden = false;
       }
 
-      content.innerHTML = `
-        <section class="placeholder">
-          <h3>${titles[section]}</h3>
-          <p>${descriptions[section]}</p>
-          <p>
-            Esta sección todavía no está conectada a la base de datos.
-            La habilitaremos paso a paso, con los permisos adecuados.
-          </p>
-          <button class="back-home" id="backHome">
-            Volver al panel principal
-          </button>
-        </section>
-        <div class="footer">
-          © 2026 CLICK COMMERCE · Gestión empresarial
-        </div>
-      `;
+      function mostrarSeccion(seccion) {
+        if (!titulos[seccion]) return;
 
-      document.getElementById("backHome").addEventListener("click", () => {
-        location.reload();
-      });
-    }
+        const contenido = document.getElementById("content");
+        document.getElementById("pageTitle").textContent = titulos[seccion];
 
-    document.querySelectorAll("#menu button").forEach(button => {
-      button.addEventListener("click", () => {
-        showSection(button.dataset.section);
-      });
-    });
-
-    document.querySelectorAll("[data-open]").forEach(button => {
-      button.addEventListener("click", () => {
-        showSection(button.dataset.open);
-      });
-    });
-
-    document.getElementById("logout").addEventListener("click", () => {
-      sessionStorage.removeItem("clickCommerceSession");
-      window.location.href = "./";
-    });
-  </script>
-
-  <script>
-  (() => {
-    const SUPABASE_URL = "https://dqannkyvzthcycbiuacs.supabase.co";
-    const SUPABASE_KEY = "sb_publishable_b6D0Dbn9tY4tyFSXqYjuNg_cq1Rm3xD";
-  
-    const caja = document.createElement("div");
-    caja.style.cssText = [
-      "position:fixed",
-      "right:16px",
-      "bottom:16px",
-      "z-index:99999",
-      "width:min(340px,calc(100vw - 32px))",
-      "padding:16px",
-      "background:#0b1f3a",
-      "color:white",
-      "border:1px solid #c9a23f",
-      "border-radius:12px",
-      "font-family:Arial,sans-serif",
-      "box-shadow:0 4px 18px #0003"
-    ].join(";");
-  
-    caja.innerHTML = `
-      <strong style="color:#e0bd61">CLICK COMMERCE · Conexión</strong>
-      <p id="ccEstado" style="font-size:13px;line-height:1.5">
-        Preparando prueba de conexión…
-      </p>
-      <button id="ccProbar" style="
-        background:#c9a23f;color:#0b1f3a;border:0;
-        border-radius:6px;padding:10px 14px;
-        font-weight:bold;cursor:pointer">
-        Probar conexión
-      </button>
-    `;
-  
-    document.body.appendChild(caja);
-  
-    const estado = caja.querySelector("#ccEstado");
-    const boton = caja.querySelector("#ccProbar");
-  
-    boton.addEventListener("click", async () => {
-      boton.disabled = true;
-      estado.textContent = "Verificando sesión y permisos…";
-  
-      try {
-        const guardado = sessionStorage.getItem("clickCommerceSession");
-  
-        if (!guardado) {
-          throw new Error(
-            "No se encontró la sesión. Inicia sesión y abre el panel en la misma pestaña."
+        document.querySelectorAll("#menu button").forEach(boton => {
+          boton.classList.toggle(
+            "active",
+            boton.dataset.section === seccion
           );
+        });
+
+        if (seccion === "inicio") {
+          location.reload();
+          return;
         }
-  
-        const sesion = JSON.parse(guardado);
-  
-        if (!sesion.access_token) {
-          throw new Error("La sesión no contiene un token de acceso.");
-        }
-  
-        const respuesta = await fetch(
-          `${SUPABASE_URL}/rest/v1/empresas?select=id&limit=1`,
-          {
-            method: "GET",
-            headers: {
-              "apikey": SUPABASE_KEY,
-              "Authorization": `Bearer ${sesion.access_token}`,
-              "Accept": "application/json"
-            }
+
+        const titulo = document.createElement("h3");
+        titulo.textContent = titulos[seccion];
+
+        const descripcion = document.createElement("p");
+        descripcion.textContent = descripciones[seccion];
+
+        const aviso = document.createElement("p");
+        aviso.textContent =
+          "Esta sección todavía no está conectada a la base de datos. " +
+          "La habilitaremos paso a paso, con los permisos adecuados.";
+
+        const volver = document.createElement("button");
+        volver.className = "back-home";
+        volver.textContent = "Volver al panel principal";
+        volver.addEventListener("click", () => location.reload());
+
+        const panel = document.createElement("section");
+        panel.className = "placeholder";
+        panel.append(titulo, descripcion, aviso, volver);
+
+        const pie = document.createElement("div");
+        pie.className = "footer";
+        pie.textContent =
+          "© 2026 CLICK COMMERCE · Gestión empresarial";
+
+        contenido.replaceChildren(panel, pie);
+      }
+
+      async function verificarAcceso() {
+        botonReintentar.disabled = true;
+        botonReintentar.hidden = true;
+        botonVolver.hidden = true;
+
+        guardia.hidden = false;
+        aplicacion.hidden = true;
+
+        mensajeGuardia.className = "guardia-mensaje";
+        mensajeGuardia.textContent =
+          "Verificando tu sesión y los permisos de acceso...";
+
+        try {
+          const guardado = sessionStorage.getItem("clickCommerceSession");
+
+          if (!guardado) {
+            throw new Error(
+              "No se encontró una sesión. Vuelve al acceso e inicia sesión."
+            );
           }
-        );
-  
-        if (!respuesta.ok) {
-          const detalle = await respuesta.text();
-          throw new Error(
-            `Supabase respondió ${respuesta.status}: ${detalle.slice(0, 350)}`
+
+          let sesion;
+
+          try {
+            sesion = JSON.parse(guardado);
+          } catch {
+            throw new Error(
+              "La sesión guardada no se puede leer. Vuelve al acceso e inicia sesión."
+            );
+          }
+
+          if (!sesion || !sesion.access_token) {
+            throw new Error(
+              "La sesión no contiene un token de acceso válido."
+            );
+          }
+
+          // Paso 1: validar el token con el servicio de autenticación.
+          const respuestaUsuario = await fetch(
+            `${SUPABASE_URL}/auth/v1/user`,
+            {
+              method: "GET",
+              headers: {
+                "apikey": SUPABASE_KEY,
+                "Authorization": `Bearer ${sesion.access_token}`
+              }
+            }
           );
+
+          if (!respuestaUsuario.ok) {
+            throw new Error(
+              "La sesión ha vencido o no es válida. Vuelve al acceso e inicia sesión nuevamente."
+            );
+          }
+
+          const usuario = await respuestaUsuario.json();
+
+          if (!usuario || !usuario.id) {
+            throw new Error(
+              "Supabase no devolvió la identidad del usuario autenticado."
+            );
+          }
+
+          // Paso 2: comprobar el rol usando la función de la base de datos.
+          const respuestaRol = await fetch(
+            `${SUPABASE_URL}/rest/v1/rpc/cc_es_superadmin`,
+            {
+              method: "POST",
+              headers: {
+                "apikey": SUPABASE_KEY,
+                "Authorization": `Bearer ${sesion.access_token}`,
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+              },
+              body: "{}"
+            }
+          );
+
+          if (!respuestaRol.ok) {
+            const detalle = await respuestaRol.text();
+
+            throw new Error(
+              `No se pudo verificar el rol (HTTP ${respuestaRol.status}). ` +
+              `${detalle.slice(0, 220)}`
+            );
+          }
+
+          const esSuperadmin = await respuestaRol.json();
+
+          if (esSuperadmin !== true) {
+            mostrarError(
+              "La sesión es válida, pero Supabase no reconoce este perfil como superadministradora. No se habilitó el panel. Revisaremos los permisos antes de continuar.",
+              false
+            );
+            return;
+          }
+
+          // Solo se muestra el panel cuando ambas comprobaciones funcionan.
+          document.getElementById("ccIdentidad").textContent =
+            usuario.email || "Usuario autenticado";
+
+          document.getElementById("ccNombreRol").textContent =
+            "Superadministradora";
+
+          document.getElementById("ccEstadoPanel").textContent =
+            "Acceso verificado";
+
+          document.getElementById("ccPuntoEstado").classList.add("ok");
+
+          guardia.hidden = true;
+          aplicacion.hidden = false;
+
+        } catch (error) {
+          mostrarError(
+            error && error.message
+              ? error.message
+              : "Ocurrió un error inesperado al verificar el acceso."
+          );
+        } finally {
+          botonReintentar.disabled = false;
         }
-  
-        await respuesta.json();
-  
-        estado.innerHTML =
-          '<span style="color:#9ee6ae;font-weight:bold">' +
-          "Conexión correcta con Supabase.</span><br>" +
-          "La consulta a Empresas fue aceptada por el servidor.";
-      } catch (error) {
-        estado.innerHTML =
-          '<span style="color:#ffb3b3;font-weight:bold">' +
-          "No se pudo completar la prueba.</span><br>" +
-          String(error.message || error).replace(/</g, "&lt;");
-      } finally {
-        boton.disabled = false;
       }
-    });
-  
-    estado.textContent = "Pulsa el botón para verificar la conexión.";
-  })();
+
+      document.querySelectorAll("#menu button").forEach(boton => {
+        boton.addEventListener("click", () => {
+          mostrarSeccion(boton.dataset.section);
+        });
+      });
+
+      document.querySelectorAll("[data-open]").forEach(boton => {
+        boton.addEventListener("click", () => {
+          mostrarSeccion(boton.dataset.open);
+        });
+      });
+
+      document.getElementById("logout").addEventListener("click", () => {
+        sessionStorage.removeItem("clickCommerceSession");
+        window.location.href = "./";
+      });
+
+      botonVolver.addEventListener("click", () => {
+        sessionStorage.removeItem("clickCommerceSession");
+        window.location.href = "./";
+      });
+
+      botonReintentar.addEventListener("click", verificarAcceso);
+
+      verificarAcceso();
+    })();
   </script>
 </body>
 </html>
