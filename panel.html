@@ -7,435 +7,111 @@
   <meta name="theme-color" content="#0B1F3A">
   <meta name="description" content="Panel de administración de CLICK COMMERCE">
   <title>Panel de Administración | CLICK COMMERCE</title>
-
   <style>
     :root {
-      --azul: #0B1F3A;
-      --azul-claro: #15365D;
-      --dorado: #D9B45B;
-      --fondo: #F3F5F8;
-      --blanco: #FFFFFF;
-      --texto: #172337;
-      --gris: #738096;
-      --borde: #DCE2EA;
-      --verde: #287545;
-      --rojo: #A52A2A;
+      --azul:#0B1F3A; --azul-claro:#15365D; --dorado:#D9B45B;
+      --fondo:#F3F5F8; --blanco:#FFF; --texto:#172337;
+      --gris:#738096; --borde:#DCE2EA; --verde:#287545; --rojo:#A52A2A;
     }
-
-    * { box-sizing: border-box; }
-
-    html, body, button, input, select {
-      font-family: "Times New Roman", Times, serif;
-    }
-
-    body {
-      margin: 0;
-      background: var(--fondo);
-      color: var(--texto);
-    }
-
-    button { cursor: pointer; }
-    button:disabled { cursor: not-allowed; opacity: .6; }
-    [hidden] { display: none !important; }
-
-    .app { min-height: 100vh; display: flex; }
-
-    .sidebar {
-      width: 255px;
-      flex-shrink: 0;
-      background: var(--azul);
-      color: white;
-      padding: 25px 16px;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 0 8px 25px;
-      border-bottom: 1px solid #ffffff29;
-    }
-
-    .logo {
-      width: 48px;
-      height: 48px;
-      flex-shrink: 0;
-      border: 1px solid var(--dorado);
-      border-radius: 10px;
-      display: grid;
-      place-items: center;
-      color: var(--dorado);
-      font-size: 12px;
-      text-align: center;
-    }
-
-    .brand h1 { margin: 0; font-size: 20px; color: white; }
-    .brand p { margin: 5px 0 0; font-size: 12px; color: #D6DCE6; }
-
-    .menu-label {
-      margin: 25px 10px 10px;
-      color: #B7C3D4;
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-
-    .nav { display: grid; gap: 5px; }
-
-    .nav button {
-      width: 100%;
-      padding: 12px 13px;
-      display: flex;
-      gap: 11px;
-      align-items: center;
-      text-align: left;
-      color: #E5EAF2;
-      background: transparent;
-      border: 1px solid transparent;
-      border-radius: 8px;
-      font-size: 16px;
-    }
-
-    .nav button:hover, .nav button.active {
-      background: var(--azul-claro);
-      border-color: #D9B45B66;
-      color: var(--dorado);
-    }
-
-    .nav-icon { width: 22px; text-align: center; font-size: 18px; }
-
-    .sidebar-bottom {
-      margin-top: auto;
-      padding: 20px 8px 0;
-      border-top: 1px solid #ffffff29;
-    }
-
-    .admin-label {
-      color: #D7DFEA;
-      font-size: 13px;
-      line-height: 1.5;
-      overflow-wrap: anywhere;
-    }
-
-    .admin-label strong {
-      color: var(--dorado);
-      display: block;
-      font-size: 16px;
-    }
-
-    .main { min-width: 0; flex: 1; }
-
-    .topbar {
-      background: white;
-      min-height: 82px;
-      padding: 18px 30px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      border-bottom: 1px solid var(--borde);
-    }
-
-    .topbar h2 { margin: 0; font-size: 24px; color: var(--azul); }
-    .topbar p { margin: 5px 0 0; color: var(--gris); font-size: 14px; }
-
-    .top-actions { display: flex; align-items: center; gap: 12px; }
-
-    .status {
-      display: flex;
-      align-items: center;
-      gap: 7px;
-      font-size: 14px;
-      color: var(--gris);
-    }
-
-    .status-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--dorado);
-      flex-shrink: 0;
-    }
-
-    .status-dot.ok { background: #4E9A68; }
-    .status-dot.error { background: #C43B3B; }
-
-    .logout {
-      border: 1px solid var(--borde);
-      border-radius: 7px;
-      padding: 9px 13px;
-      background: white;
-      color: var(--azul);
-      font-size: 14px;
-    }
-
-    .content {
-      padding: 28px 30px;
-      max-width: 1500px;
-      margin: 0 auto;
-    }
-
-    .welcome {
-      background: var(--azul);
-      color: white;
-      border-radius: 12px;
-      padding: 26px 28px;
-      position: relative;
-      overflow: hidden;
-      margin-bottom: 25px;
-    }
-
-    .welcome::after {
-      content: "";
-      position: absolute;
-      width: 180px;
-      height: 180px;
-      border: 24px solid #D9B45B26;
-      border-radius: 50%;
-      right: -35px;
-      top: -65px;
-      pointer-events: none;
-    }
-
-    .welcome h3 { margin: 0 0 9px; font-size: 27px; color: var(--dorado); }
-
-    .welcome p {
-      margin: 0;
-      color: #E1E7EF;
-      font-size: 16px;
-      line-height: 1.5;
-      max-width: 650px;
-    }
-
-    .section-heading {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      margin: 28px 0 16px;
-    }
-
-    .section-heading h3 { margin: 0; color: var(--azul); font-size: 21px; }
-    .section-heading p { color: var(--gris); font-size: 14px; margin: 5px 0 0; }
-
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 16px;
-    }
-
-    .stat-card {
-      background: white;
-      padding: 20px;
-      border: 1px solid var(--borde);
-      border-radius: 10px;
-      min-height: 135px;
-    }
-
-    .stat-top { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
-    .stat-title { color: var(--gris); font-size: 15px; }
-
-    .stat-icon {
-      width: 38px;
-      height: 38px;
-      display: grid;
-      place-items: center;
-      border-radius: 9px;
-      background: #F8F2E4;
-      color: var(--azul);
-      font-size: 20px;
-    }
-
-    .stat-value { margin-top: 18px; color: var(--azul); font-size: 21px; font-weight: bold; }
-    .stat-note { margin-top: 6px; color: var(--gris); font-size: 13px; }
-
-    .module-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 16px;
-    }
-
-    .module {
-      background: white;
-      border: 1px solid var(--borde);
-      border-radius: 10px;
-      padding: 21px;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      min-height: 185px;
-    }
-
-    .module-icon {
-      width: 43px;
-      height: 43px;
-      display: grid;
-      place-items: center;
-      background: var(--azul);
-      color: var(--dorado);
-      border-radius: 10px;
-      font-size: 22px;
-      margin-bottom: 15px;
-    }
-
-    .module h4 { margin: 0 0 8px; color: var(--azul); font-size: 19px; }
-
-    .module p {
-      color: var(--gris);
-      font-size: 14px;
-      line-height: 1.5;
-      margin: 0 0 16px;
-    }
-
-    .module button {
-      margin-top: auto;
-      border: 0;
-      background: transparent;
-      color: #8A681B;
-      padding: 0;
-      font-size: 15px;
-      font-weight: bold;
-    }
-
-    .module button:hover { text-decoration: underline; }
-
-    .notice {
-      background: white;
-      border: 1px solid var(--borde);
-      border-left: 4px solid var(--dorado);
-      border-radius: 8px;
-      padding: 17px 20px;
-      margin-top: 24px;
-      font-size: 14px;
-      line-height: 1.6;
-    }
-
-    .notice strong { color: var(--azul); }
-
-    .placeholder {
-      background: white;
-      border: 1px solid var(--borde);
-      border-radius: 10px;
-      padding: 28px;
-      min-height: 220px;
-    }
-
-    .placeholder h3 { color: var(--azul); font-size: 23px; margin-top: 0; }
-    .placeholder p { color: var(--gris); line-height: 1.6; }
-
-    .back-home {
-      margin-top: 12px;
-      border: 1px solid var(--dorado);
-      background: var(--azul);
-      color: white;
-      padding: 11px 16px;
-      border-radius: 7px;
-      font-size: 15px;
-    }
-
-    .footer { color: var(--gris); text-align: center; font-size: 13px; padding: 28px 10px 12px; }
-
-    .guardia {
-      position: fixed;
-      inset: 0;
-      z-index: 100000;
-      background: var(--azul);
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 22px;
-    }
-
-    .guardia-card {
-      width: min(460px, 100%);
-      padding: 30px;
-      border: 1px solid var(--dorado);
-      border-radius: 14px;
-      background: #102947;
-      text-align: center;
-    }
-
-    .guardia-card h1 { color: var(--dorado); font-size: 25px; margin: 0 0 14px; }
-    .guardia-card p { font-size: 16px; line-height: 1.6; overflow-wrap: anywhere; }
-    .guardia-boton { margin-top: 12px; padding: 11px 18px; border: 0; border-radius: 7px; background: var(--dorado); color: var(--azul); font-weight: bold; font-size: 16px; }
-    .guardia-mensaje { color: #E7EDF5; }
-    .guardia-error { color: #FFB3B3; }
-
-    .cc-form-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 14px;
-      margin-top: 15px;
-    }
-
-    .cc-campo { display: block; color: var(--azul); font-weight: bold; }
-    .cc-campo input, .cc-campo select {
-      display: block;
-      width: 100%;
-      padding: 11px;
-      margin-top: 6px;
-      border: 1px solid var(--borde);
-      border-radius: 6px;
-      background: white;
-      color: var(--texto);
-      font-size: 16px;
-    }
-
-    .cc-tabla-contenedor { width: 100%; overflow-x: auto; margin-top: 18px; }
-    .cc-tabla { width: 100%; border-collapse: collapse; background: white; }
-    .cc-tabla th { background: var(--azul); color: white; text-align: left; padding: 12px; }
-    .cc-tabla td { padding: 12px; border-bottom: 1px solid var(--borde); vertical-align: top; }
-    .cc-tabla tr:hover td { background: #FAFBFD; }
-
-    .cc-boton-secundario {
-      padding: 8px 10px;
-      border: 1px solid var(--dorado);
-      border-radius: 6px;
-      background: white;
-      color: var(--azul);
-      font-size: 15px;
-    }
-
-    .cc-mensaje { padding: 12px 0; line-height: 1.5; overflow-wrap: anywhere; }
-    .cc-mensaje.ok { color: var(--verde); }
-    .cc-mensaje.error { color: var(--rojo); }
-    .cc-mensaje.info { color: var(--gris); }
-
-    @media (max-width: 1100px) {
-      .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .module-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    }
-
-    @media (max-width: 760px) {
-      .app { display: block; }
-      .sidebar { width: 100%; padding: 16px; }
-      .brand { padding-bottom: 16px; }
-      .menu-label { margin-top: 16px; }
-      .nav { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .nav button { font-size: 14px; padding: 10px 8px; }
-      .sidebar-bottom { margin-top: 17px; padding-top: 13px; }
-      .topbar { padding: 16px; align-items: flex-start; }
-      .topbar h2 { font-size: 21px; }
-      .top-actions { align-items: flex-end; flex-direction: column; }
-      .content { padding: 18px 14px; }
-      .welcome { padding: 22px 20px; }
-      .welcome h3 { font-size: 23px; }
-      .cards, .module-grid { grid-template-columns: 1fr; }
-      .placeholder { padding: 18px; }
+    *{box-sizing:border-box}
+    html,body,button,input,select,textarea{font-family:"Times New Roman",Times,serif}
+    body{margin:0;background:var(--fondo);color:var(--texto)}
+    button{cursor:pointer}
+    button:disabled{cursor:not-allowed;opacity:.6}
+    [hidden]{display:none!important}
+    .app{min-height:100vh;display:flex}
+    .sidebar{width:255px;flex-shrink:0;background:var(--azul);color:white;padding:25px 16px;display:flex;flex-direction:column}
+    .brand{display:flex;align-items:center;gap:12px;padding:0 8px 25px;border-bottom:1px solid #ffffff29}
+    .logo{width:48px;height:48px;flex-shrink:0;border:1px solid var(--dorado);border-radius:10px;display:grid;place-items:center;color:var(--dorado);font-size:12px;text-align:center}
+    .brand h1{margin:0;font-size:20px;color:white}
+    .brand p{margin:5px 0 0;font-size:12px;color:#D6DCE6}
+    .menu-label{margin:25px 10px 10px;color:#B7C3D4;font-size:12px;text-transform:uppercase;letter-spacing:1px}
+    .nav{display:grid;gap:5px}
+    .nav button{width:100%;padding:12px 13px;display:flex;gap:11px;align-items:center;text-align:left;color:#E5EAF2;background:transparent;border:1px solid transparent;border-radius:8px;font-size:16px}
+    .nav button:hover,.nav button.active{background:var(--azul-claro);border-color:#D9B45B66;color:var(--dorado)}
+    .nav-icon{width:22px;text-align:center;font-size:18px}
+    .sidebar-bottom{margin-top:auto;padding:20px 8px 0;border-top:1px solid #ffffff29}
+    .admin-label{color:#D7DFEA;font-size:13px;line-height:1.5;overflow-wrap:anywhere}
+    .admin-label strong{color:var(--dorado);display:block;font-size:16px}
+    .main{min-width:0;flex:1}
+    .topbar{background:white;min-height:82px;padding:18px 30px;display:flex;align-items:center;justify-content:space-between;gap:16px;border-bottom:1px solid var(--borde)}
+    .topbar h2{margin:0;font-size:24px;color:var(--azul)}
+    .topbar p{margin:5px 0 0;color:var(--gris);font-size:14px}
+    .top-actions{display:flex;align-items:center;gap:12px}
+    .status{display:flex;align-items:center;gap:7px;font-size:14px;color:var(--gris)}
+    .status-dot{width:8px;height:8px;border-radius:50%;background:var(--dorado);flex-shrink:0}
+    .status-dot.ok{background:#4E9A68}
+    .status-dot.error{background:#C43B3B}
+    .logout{border:1px solid var(--borde);border-radius:7px;padding:9px 13px;background:white;color:var(--azul);font-size:14px}
+    .content{padding:28px 30px;max-width:1500px;margin:0 auto}
+    .welcome{background:var(--azul);color:white;border-radius:12px;padding:26px 28px;position:relative;overflow:hidden;margin-bottom:25px}
+    .welcome::after{content:"";position:absolute;width:180px;height:180px;border:24px solid #D9B45B26;border-radius:50%;right:-35px;top:-65px;pointer-events:none}
+    .welcome h3{margin:0 0 9px;font-size:27px;color:var(--dorado)}
+    .welcome p{margin:0;color:#E1E7EF;font-size:16px;line-height:1.5;max-width:650px}
+    .section-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:28px 0 16px}
+    .section-heading h3{margin:0;color:var(--azul);font-size:21px}
+    .section-heading p{color:var(--gris);font-size:14px;margin:5px 0 0}
+    .cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+    .stat-card{background:white;padding:20px;border:1px solid var(--borde);border-radius:10px;min-height:135px}
+    .stat-top{display:flex;justify-content:space-between;align-items:center;gap:8px}
+    .stat-title{color:var(--gris);font-size:15px}
+    .stat-icon{width:38px;height:38px;display:grid;place-items:center;border-radius:9px;background:#F8F2E4;color:var(--azul);font-size:20px}
+    .stat-value{margin-top:18px;color:var(--azul);font-size:21px;font-weight:bold}
+    .stat-note{margin-top:6px;color:var(--gris);font-size:13px}
+    .module-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+    .module{background:white;border:1px solid var(--borde);border-radius:10px;padding:21px;display:flex;flex-direction:column;align-items:flex-start;min-height:185px}
+    .module-icon{width:43px;height:43px;display:grid;place-items:center;background:var(--azul);color:var(--dorado);border-radius:10px;font-size:22px;margin-bottom:15px}
+    .module h4{margin:0 0 8px;color:var(--azul);font-size:19px}
+    .module p{color:var(--gris);font-size:14px;line-height:1.5;margin:0 0 16px}
+    .module button{margin-top:auto;border:0;background:transparent;color:#8A681B;padding:0;font-size:15px;font-weight:bold}
+    .module button:hover{text-decoration:underline}
+    .notice{background:white;border:1px solid var(--borde);border-left:4px solid var(--dorado);border-radius:8px;padding:17px 20px;margin-top:24px;font-size:14px;line-height:1.6}
+    .notice strong{color:var(--azul)}
+    .placeholder{background:white;border:1px solid var(--borde);border-radius:10px;padding:28px;min-height:220px}
+    .placeholder h3{color:var(--azul);font-size:23px;margin-top:0}
+    .placeholder p{color:var(--gris);line-height:1.6}
+    .back-home{margin-top:12px;border:1px solid var(--dorado);background:var(--azul);color:white;padding:11px 16px;border-radius:7px;font-size:15px}
+    .footer{color:var(--gris);text-align:center;font-size:13px;padding:28px 10px 12px}
+    .guardia{position:fixed;inset:0;z-index:100000;background:var(--azul);color:white;display:flex;align-items:center;justify-content:center;padding:22px}
+    .guardia-card{width:min(460px,100%);padding:30px;border:1px solid var(--dorado);border-radius:14px;background:#102947;text-align:center}
+    .guardia-card h1{color:var(--dorado);font-size:25px;margin:0 0 14px}
+    .guardia-card p{font-size:16px;line-height:1.6;overflow-wrap:anywhere}
+    .guardia-boton{margin-top:12px;padding:11px 18px;border:0;border-radius:7px;background:var(--dorado);color:var(--azul);font-weight:bold;font-size:16px}
+    .guardia-error{color:#FFB3B3}
+    .cc-form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:15px}
+    .cc-campo{display:block;color:var(--azul);font-weight:bold}
+    .cc-campo input,.cc-campo select,.cc-campo textarea{display:block;width:100%;padding:11px;margin-top:6px;border:1px solid var(--borde);border-radius:6px;background:white;color:var(--texto);font-size:16px}
+    .cc-tabla-contenedor{width:100%;overflow-x:auto;margin-top:18px}
+    .cc-tabla{width:100%;border-collapse:collapse;background:white}
+    .cc-tabla th{background:var(--azul);color:white;text-align:left;padding:12px;white-space:nowrap}
+    .cc-tabla td{padding:12px;border-bottom:1px solid var(--borde);vertical-align:top}
+    .cc-tabla tr:hover td{background:#FAFBFD}
+    .cc-boton-secundario{padding:8px 10px;border:1px solid var(--dorado);border-radius:6px;background:white;color:var(--azul);font-size:15px;margin:2px}
+    .cc-mensaje{padding:12px 0;line-height:1.5;overflow-wrap:anywhere}
+    .cc-mensaje.ok{color:var(--verde)}
+    .cc-mensaje.error{color:var(--rojo)}
+    .cc-mensaje.info{color:var(--gris)}
+    .cc-bloque{margin-top:22px;padding:20px;background:#F8FAFC;border:1px solid var(--borde);border-radius:10px}
+    .cc-bloque h3{margin-top:0;color:var(--azul)}
+    .cc-acciones{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+    .cc-etiqueta{display:inline-block;padding:4px 8px;border-radius:5px;background:#F8F2E4;color:#765719;font-size:13px}
+    @media(max-width:1100px){.cards{grid-template-columns:repeat(2,minmax(0,1fr))}.module-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    @media(max-width:760px){
+      .app{display:block}.sidebar{width:100%;padding:16px}.brand{padding-bottom:16px}
+      .menu-label{margin-top:16px}.nav{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .nav button{font-size:14px;padding:10px 8px}.sidebar-bottom{margin-top:17px;padding-top:13px}
+      .topbar{padding:16px;align-items:flex-start}.topbar h2{font-size:21px}
+      .top-actions{align-items:flex-end;flex-direction:column}.content{padding:18px 14px}
+      .welcome{padding:22px 20px}.welcome h3{font-size:23px}
+      .cards,.module-grid{grid-template-columns:1fr}.placeholder{padding:18px}
     }
   </style>
 </head>
-
 <body>
   <div class="guardia" id="ccGuardia">
     <div class="guardia-card">
       <h1>CLICK COMMERCE</h1>
-      <p class="guardia-mensaje" id="ccGuardiaMensaje">
-        Verificando tu sesión y los permisos de acceso...
-      </p>
+      <p id="ccGuardiaMensaje">Verificando tu sesión y los permisos de acceso...</p>
       <button class="guardia-boton" id="ccReintentar" hidden>Volver a verificar</button>
       <button class="guardia-boton" id="ccVolverAcceso" hidden>Volver al acceso</button>
     </div>
@@ -445,28 +121,21 @@
     <aside class="sidebar">
       <div class="brand">
         <div class="logo">CLICK<br>COMMERCE</div>
-        <div>
-          <h1>CLICK COMMERCE</h1>
-          <p>Gestión empresarial</p>
-        </div>
+        <div><h1>CLICK COMMERCE</h1><p>Gestión empresarial</p></div>
       </div>
-
       <div class="menu-label">Menú principal</div>
-
       <nav class="nav" id="menu">
-        <button class="active" data-section="inicio"><span class="nav-icon">⌂</span> Inicio</button>
-        <button data-section="empresas"><span class="nav-icon">▦</span> Empresas</button>
-        <button data-section="catalogos"><span class="nav-icon">▤</span> Catálogos</button>
-        <button data-section="contratos"><span class="nav-icon">▧</span> Contratos</button>
-        <button data-section="pagos"><span class="nav-icon">$</span> Pagos y mensualidades</button>
-        <button data-section="finanzas"><span class="nav-icon">◫</span> Finanzas</button>
-        <button data-section="usuarios"><span class="nav-icon">♙</span> Usuarios y permisos</button>
-        <button data-section="historial"><span class="nav-icon">◷</span> Historial</button>
+        <button class="active" data-section="inicio"><span class="nav-icon">⌂</span>Inicio</button>
+        <button data-section="empresas"><span class="nav-icon">▦</span>Empresas</button>
+        <button data-section="catalogos"><span class="nav-icon">▤</span>Catálogos y servicios</button>
+        <button data-section="contratos"><span class="nav-icon">▧</span>Contratos</button>
+        <button data-section="pagos"><span class="nav-icon">$</span>Pagos y mensualidades</button>
+        <button data-section="finanzas"><span class="nav-icon">◫</span>Finanzas</button>
+        <button data-section="usuarios"><span class="nav-icon">♙</span>Usuarios y permisos</button>
+        <button data-section="historial"><span class="nav-icon">◷</span>Historial</button>
       </nav>
-
       <div class="sidebar-bottom">
-        <div class="admin-label">
-          Sesión de trabajo
+        <div class="admin-label">Sesión de trabajo
           <strong id="ccNombreRol">Superadministradora</strong>
           <span id="ccIdentidad">CLICK COMMERCE</span>
         </div>
@@ -475,616 +144,660 @@
 
     <main class="main">
       <header class="topbar">
-        <div>
-          <h2 id="pageTitle">Panel principal</h2>
-          <p>Centro de control de la plataforma</p>
-        </div>
+        <div><h2 id="pageTitle">Panel principal</h2><p>Centro de control de la plataforma</p></div>
         <div class="top-actions">
-          <div class="status">
-            <span class="status-dot" id="ccPuntoEstado"></span>
-            <span id="ccEstadoPanel">Acceso verificado</span>
-          </div>
+          <div class="status"><span class="status-dot" id="ccPuntoEstado"></span><span id="ccEstadoPanel">Verificando acceso</span></div>
           <button class="logout" id="logout">Volver al acceso</button>
         </div>
       </header>
-
       <div class="content" id="content">
         <section class="welcome">
           <h3>Bienvenida a CLICK COMMERCE</h3>
           <p>Administra desde un solo lugar las empresas, sus catálogos, los servicios contratados y el control de pagos. Esta plataforma está diseñada para crecer contigo.</p>
         </section>
-
-        <div class="section-heading">
-          <div>
-            <h3>Resumen general</h3>
-            <p>Los indicadores se actualizarán cuando conectemos cada módulo.</p>
-          </div>
-        </div>
-
+        <div class="section-heading"><div><h3>Resumen general</h3><p>Los indicadores se actualizarán al conectar cada módulo.</p></div></div>
         <div class="cards">
-          <article class="stat-card">
-            <div class="stat-top"><span class="stat-title">Empresas registradas</span><span class="stat-icon">▦</span></div>
-            <div class="stat-value">Por conectar</div>
-            <div class="stat-note">Datos de Supabase</div>
-          </article>
-          <article class="stat-card">
-            <div class="stat-top"><span class="stat-title">Catálogos activos</span><span class="stat-icon">▤</span></div>
-            <div class="stat-value">Por conectar</div>
-            <div class="stat-note">Datos de Supabase</div>
-          </article>
-          <article class="stat-card">
-            <div class="stat-top"><span class="stat-title">Pagos pendientes</span><span class="stat-icon">$</span></div>
-            <div class="stat-value">Por conectar</div>
-            <div class="stat-note">Control de vencimientos</div>
-          </article>
-          <article class="stat-card">
-            <div class="stat-top"><span class="stat-title">Ingresos registrados</span><span class="stat-icon">◫</span></div>
-            <div class="stat-value">Por conectar</div>
-            <div class="stat-note">Resumen financiero</div>
-          </article>
+          <article class="stat-card"><div class="stat-top"><span class="stat-title">Empresas registradas</span><span class="stat-icon">▦</span></div><div class="stat-value">Conectado</div><div class="stat-note">Consulta en Empresas</div></article>
+          <article class="stat-card"><div class="stat-top"><span class="stat-title">Servicios activos</span><span class="stat-icon">▤</span></div><div class="stat-value">Conectado</div><div class="stat-note">Catálogo de servicios</div></article>
+          <article class="stat-card"><div class="stat-top"><span class="stat-title">Pagos pendientes</span><span class="stat-icon">$</span></div><div class="stat-value">Por conectar</div><div class="stat-note">Control de vencimientos</div></article>
+          <article class="stat-card"><div class="stat-top"><span class="stat-title">Ingresos registrados</span><span class="stat-icon">◫</span></div><div class="stat-value">Por conectar</div><div class="stat-note">Resumen financiero</div></article>
         </div>
-
-        <div class="section-heading">
-          <div>
-            <h3>Módulos de administración</h3>
-            <p>Selecciona una sección para conocer su función.</p>
-          </div>
-        </div>
-
+        <div class="section-heading"><div><h3>Módulos de administración</h3><p>Selecciona una sección para trabajar.</p></div></div>
         <div class="module-grid">
-          <article class="module">
-            <div class="module-icon">▦</div>
-            <h4>Empresas</h4>
-            <p>Registrar empresas, actualizar sus datos y controlar su estado.</p>
-            <button data-open="empresas">Abrir sección →</button>
-          </article>
-          <article class="module">
-            <div class="module-icon">▤</div>
-            <h4>Catálogos y servicios</h4>
-            <p>Gestionar catálogos, servicios contratados y su publicación.</p>
-            <button data-open="catalogos">Abrir sección →</button>
-          </article>
-          <article class="module">
-            <div class="module-icon">▧</div>
-            <h4>Contratos</h4>
-            <p>Consultar condiciones comerciales, entregas y acuerdos.</p>
-            <button data-open="contratos">Abrir sección →</button>
-          </article>
-          <article class="module">
-            <div class="module-icon">$</div>
-            <h4>Pagos y mensualidades</h4>
-            <p>Controlar anticipos, saldos, vencimientos y mensualidades.</p>
-            <button data-open="pagos">Abrir sección →</button>
-          </article>
-          <article class="module">
-            <div class="module-icon">◫</div>
-            <h4>Finanzas</h4>
-            <p>Organizar ingresos, gastos, resultados y reportes financieros.</p>
-            <button data-open="finanzas">Abrir sección →</button>
-          </article>
-          <article class="module">
-            <div class="module-icon">♙</div>
-            <h4>Usuarios y permisos</h4>
-            <p>Administrar accesos y permisos para empresas y colaboradores.</p>
-            <button data-open="usuarios">Abrir sección →</button>
-          </article>
-          <article class="module">
-            <div class="module-icon">◷</div>
-            <h4>Historial de movimientos</h4>
-            <p>Consultar cambios, fechas y usuarios responsables.</p>
-            <button data-open="historial">Abrir sección →</button>
-          </article>
+          <article class="module"><div class="module-icon">▦</div><h4>Empresas</h4><p>Registrar empresas, actualizar sus datos y controlar su estado.</p><button data-open="empresas">Abrir sección →</button></article>
+          <article class="module"><div class="module-icon">▤</div><h4>Catálogos y servicios</h4><p>Gestionar el catálogo de servicios y asignarlos a empresas.</p><button data-open="catalogos">Abrir sección →</button></article>
+          <article class="module"><div class="module-icon">▧</div><h4>Contratos</h4><p>Consultar condiciones comerciales, entregas y acuerdos.</p><button data-open="contratos">Abrir sección →</button></article>
+          <article class="module"><div class="module-icon">$</div><h4>Pagos y mensualidades</h4><p>Controlar anticipos, saldos, vencimientos y mensualidades.</p><button data-open="pagos">Abrir sección →</button></article>
+          <article class="module"><div class="module-icon">◫</div><h4>Finanzas</h4><p>Organizar ingresos, gastos, resultados y reportes financieros.</p><button data-open="finanzas">Abrir sección →</button></article>
+          <article class="module"><div class="module-icon">♙</div><h4>Usuarios y permisos</h4><p>Administrar accesos y permisos para empresas y colaboradores.</p><button data-open="usuarios">Abrir sección →</button></article>
+          <article class="module"><div class="module-icon">◷</div><h4>Historial de movimientos</h4><p>Consultar cambios, fechas y usuarios responsables.</p><button data-open="historial">Abrir sección →</button></article>
         </div>
-
-        <div class="notice">
-          <strong>Estado de la plataforma:</strong>
-          la sesión y el rol se verifican antes de mostrar el panel.
-          El módulo Empresas está conectado a Supabase.
-        </div>
-
+        <div class="notice"><strong>Seguridad:</strong> la sesión y el rol se verifican antes de mostrar el panel. Los cambios en los datos dependen de las políticas RLS de Supabase.</div>
         <div class="footer">© 2026 CLICK COMMERCE · Plataforma de gestión empresarial</div>
       </div>
     </main>
   </div>
 
   <script>
-    (() => {
-      "use strict";
+  (() => {
+    "use strict";
 
-      const SUPABASE_URL = "https://dqannkyvzthcycbiuacs.supabase.co";
-      const SUPABASE_KEY = "sb_publishable_b6D0Dbn9tY4tyFSXqYjuNg_cq1Rm3xD";
+    const SUPABASE_URL = "https://dqannkyvzthcycbiuacs.supabase.co";
+    const SUPABASE_KEY = "sb_publishable_b6D0Dbn9tY4tyFSXqYjuNg_cq1Rm3xD";
+    const guardia = document.getElementById("ccGuardia");
+    const mensajeGuardia = document.getElementById("ccGuardiaMensaje");
+    const botonReintentar = document.getElementById("ccReintentar");
+    const botonVolver = document.getElementById("ccVolverAcceso");
+    const aplicacion = document.getElementById("ccAplicacion");
 
-      const guardia = document.getElementById("ccGuardia");
-      const mensajeGuardia = document.getElementById("ccGuardiaMensaje");
-      const botonReintentar = document.getElementById("ccReintentar");
-      const botonVolver = document.getElementById("ccVolverAcceso");
-      const aplicacion = document.getElementById("ccAplicacion");
+    let sesionActual = null;
+    let usuarioActual = null;
+    let empresasCache = [];
+    let serviciosCache = [];
+    let asignacionesCache = [];
 
-      let sesionActual = null;
-      let usuarioActual = null;
-      let empresasCache = [];
+    const titulos = {
+      inicio:"Panel principal", empresas:"Gestión de empresas",
+      catalogos:"Catálogos y servicios", contratos:"Contratos",
+      pagos:"Pagos y mensualidades", finanzas:"Control financiero",
+      usuarios:"Usuarios y permisos", historial:"Historial de movimientos"
+    };
 
-      const titulos = {
-        inicio: "Panel principal",
-        empresas: "Gestión de empresas",
-        catalogos: "Catálogos y servicios",
-        contratos: "Contratos",
-        pagos: "Pagos y mensualidades",
-        finanzas: "Control financiero",
-        usuarios: "Usuarios y permisos",
-        historial: "Historial de movimientos"
-      };
+    const descripciones = {
+      contratos:"Aquí registraremos las condiciones comerciales, fechas de entrega y acuerdos.",
+      pagos:"Aquí controlaremos anticipos, saldos y mensualidades.",
+      finanzas:"Aquí prepararemos ingresos, gastos, resultados y reportes financieros.",
+      usuarios:"Aquí administraremos cuentas, roles y permisos.",
+      historial:"Aquí consultaremos los cambios y movimientos registrados."
+    };
 
-      const descripciones = {
-        catalogos: "Aquí organizaremos los catálogos y servicios contratados.",
-        contratos: "Aquí registraremos las condiciones comerciales, fechas de entrega y acuerdos.",
-        pagos: "Aquí controlaremos anticipos, saldos y mensualidades conforme a las reglas comerciales.",
-        finanzas: "Aquí prepararemos ingresos, gastos, resultados y reportes financieros.",
-        usuarios: "Aquí administraremos cuentas, roles y permisos.",
-        historial: "Aquí consultaremos los cambios y movimientos registrados."
-      };
+    function escapar(valor) {
+      return String(valor ?? "").replace(/[&<>"']/g, c => ({
+        "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;"
+      })[c]);
+    }
 
-      function mostrarError(mensaje, permitirReintento = true) {
-        aplicacion.hidden = true;
-        guardia.hidden = false;
-        mensajeGuardia.className = "guardia-mensaje guardia-error";
-        mensajeGuardia.textContent = mensaje;
-        botonReintentar.hidden = !permitirReintento;
-        botonVolver.hidden = false;
+    function mensajeEn(elemento, texto, tipo="info") {
+      if (!elemento) return;
+      elemento.className = "cc-mensaje " + tipo;
+      elemento.textContent = texto;
+    }
+
+    async function consultarSupabase(ruta, opciones={}) {
+      if (!sesionActual?.access_token) {
+        throw new Error("Tu sesión no está disponible. Inicia sesión nuevamente.");
       }
 
-      function escapar(valor) {
-        return String(valor ?? "").replace(/[&<>"']/g, caracter => ({
-          "&": "&amp;",
-          "<": "&lt;",
-          ">": "&gt;",
-          '"': "&quot;",
-          "'": "&#39;"
-        })[caracter]);
-      }
-
-      async function consultarSupabase(ruta, opciones = {}) {
-        if (!sesionActual?.access_token) {
-          throw new Error("Tu sesión no está disponible. Inicia sesión nuevamente.");
+      const respuesta = await fetch(`${SUPABASE_URL}${ruta}`, {
+        ...opciones,
+        headers:{
+          apikey:SUPABASE_KEY,
+          Authorization:`Bearer ${sesionActual.access_token}`,
+          "Content-Type":"application/json",
+          Accept:"application/json",
+          ...(opciones.headers || {})
         }
+      });
 
-        const respuesta = await fetch(`${SUPABASE_URL}${ruta}`, {
-          ...opciones,
-          headers: {
-            "apikey": SUPABASE_KEY,
-            "Authorization": `Bearer ${sesionActual.access_token}`,
-            "Content-Type": "application/json",
-            "Accept": "application/json",
-            ...(opciones.headers || {})
-          }
+      if (!respuesta.ok) {
+        const detalle = await respuesta.text();
+        let mensaje = detalle;
+        try {
+          const datos = JSON.parse(detalle);
+          mensaje = datos.message || datos.msg || datos.details || detalle;
+        } catch {}
+        if (respuesta.status === 401) {
+          throw new Error("Tu sesión venció o no es válida. Inicia sesión nuevamente.");
+        }
+        if (respuesta.status === 403) {
+          throw new Error("Supabase rechazó la operación por permisos. No se modificó la información.");
+        }
+        throw new Error(`Error de Supabase (HTTP ${respuesta.status}): ${mensaje.slice(0,350)}`);
+      }
+
+      if (respuesta.status === 204) return null;
+      const texto = await respuesta.text();
+      return texto ? JSON.parse(texto) : null;
+    }
+
+    function pie() {
+      const elemento = document.createElement("div");
+      elemento.className = "footer";
+      elemento.textContent = "© 2026 CLICK COMMERCE · Gestión empresarial";
+      return elemento;
+    }
+
+    function volverInicio() { location.reload(); }
+
+    function mostrarSeccion(seccion) {
+      if (!titulos[seccion]) return;
+      document.getElementById("pageTitle").textContent = titulos[seccion];
+      document.querySelectorAll("#menu button").forEach(b => {
+        b.classList.toggle("active", b.dataset.section === seccion);
+      });
+
+      if (seccion === "inicio") { volverInicio(); return; }
+
+      const contenido = document.getElementById("content");
+      const panel = document.createElement("section");
+      panel.className = "placeholder";
+      contenido.replaceChildren(panel, pie());
+
+      if (seccion === "empresas") {
+        cargarEmpresas(panel);
+        return;
+      }
+      if (seccion === "catalogos") {
+        cargarCatalogos(panel);
+        return;
+      }
+
+      panel.innerHTML = `
+        <h3>${escapar(titulos[seccion])}</h3>
+        <p>${escapar(descripciones[seccion] || "")}</p>
+        <p>Este módulo se conectará en una siguiente etapa, manteniendo los permisos de acceso.</p>
+        <button type="button" class="back-home" id="ccVolverInicio">Volver al panel principal</button>`;
+      panel.querySelector("#ccVolverInicio").addEventListener("click", volverInicio);
+    }
+
+    async function cargarEmpresas(panel) {
+      panel.innerHTML = `
+        <h3>Gestión de empresas</h3>
+        <p>Registra y administra las empresas clientes de CLICK COMMERCE.</p>
+        <div id="ccEmpresaMensaje" class="cc-mensaje info" role="status">Cargando empresas desde Supabase...</div>
+        <div id="ccEmpresaContenido"></div>`;
+
+      try {
+        empresasCache = await consultarSupabase(
+          "/rest/v1/empresas?select=id,nombre_comercial,razon_social,nit,email,telefono,whatsapp,direccion,estado,fecha_registro&order=fecha_registro.desc"
+        );
+        if (!Array.isArray(empresasCache)) throw new Error("Supabase no devolvió una lista válida de empresas.");
+        dibujarEmpresas(panel);
+      } catch (e) {
+        mensajeEn(panel.querySelector("#ccEmpresaMensaje"), e.message, "error");
+        const zona = panel.querySelector("#ccEmpresaContenido");
+        const btn = document.createElement("button");
+        btn.className = "back-home";
+        btn.textContent = "Volver a cargar";
+        btn.onclick = () => cargarEmpresas(panel);
+        zona.appendChild(btn);
+      }
+    }
+
+    function dibujarEmpresas(panel) {
+      const mensaje = panel.querySelector("#ccEmpresaMensaje");
+      const contenido = panel.querySelector("#ccEmpresaContenido");
+      if (!mensaje || !contenido) return;
+      mensajeEn(mensaje, `Conexión correcta. Empresas encontradas: ${empresasCache.length}`, "ok");
+
+      contenido.innerHTML = `
+        <div class="cc-acciones" style="justify-content:space-between;margin:20px 0">
+          <h3 style="margin:0">Empresas registradas</h3>
+          <button type="button" class="back-home" id="ccNuevaEmpresa">+ Registrar empresa</button>
+        </div>
+        <div id="ccFormularioEmpresa"></div><div id="ccTablaEmpresas"></div>`;
+
+      const tabla = contenido.querySelector("#ccTablaEmpresas");
+      if (!empresasCache.length) {
+        tabla.innerHTML = "<p>Todavía no hay empresas registradas.</p>";
+      } else {
+        tabla.innerHTML = `<div class="cc-tabla-contenedor"><table class="cc-tabla">
+          <thead><tr><th>Empresa</th><th>NIT</th><th>Contacto</th><th>Estado</th><th>Acciones</th></tr></thead>
+          <tbody>${empresasCache.map(e => `<tr>
+            <td><strong>${escapar(e.nombre_comercial)}</strong><div>${escapar(e.razon_social || "Sin razón social")}</div></td>
+            <td>${escapar(e.nit || "—")}</td>
+            <td>${escapar(e.telefono || e.whatsapp || "—")}<div>${escapar(e.email || "")}</div></td>
+            <td>${escapar(e.estado || "pendiente")}</td>
+            <td><button type="button" class="cc-boton-secundario" data-editar-empresa="${escapar(e.id)}">Editar</button></td>
+          </tr>`).join("")}</tbody></table></div>`;
+      }
+
+      contenido.querySelector("#ccNuevaEmpresa").onclick = () => mostrarFormularioEmpresa(panel, null);
+      contenido.querySelectorAll("[data-editar-empresa]").forEach(b => {
+        b.onclick = () => {
+          const e = empresasCache.find(x => String(x.id) === b.dataset.editarEmpresa);
+          if (e) mostrarFormularioEmpresa(panel, e);
+        };
+      });
+    }
+
+    function mostrarFormularioEmpresa(panel, empresa) {
+      const zona = panel.querySelector("#ccFormularioEmpresa");
+      if (!zona) return;
+      const editando = Boolean(empresa);
+      zona.innerHTML = `<form id="ccFormEmpresa" class="cc-bloque">
+        <h3>${editando ? "Editar empresa" : "Registrar nueva empresa"}</h3>
+        <div class="cc-form-grid">
+          <label class="cc-campo">Nombre comercial *<input name="nombre_comercial" required maxlength="180" value="${escapar(empresa?.nombre_comercial)}"></label>
+          <label class="cc-campo">Razón social<input name="razon_social" maxlength="200" value="${escapar(empresa?.razon_social)}"></label>
+          <label class="cc-campo">NIT<input name="nit" maxlength="40" value="${escapar(empresa?.nit)}"></label>
+          <label class="cc-campo">Correo electrónico<input name="email" type="email" maxlength="180" value="${escapar(empresa?.email)}"></label>
+          <label class="cc-campo">Teléfono<input name="telefono" maxlength="40" value="${escapar(empresa?.telefono)}"></label>
+          <label class="cc-campo">WhatsApp<input name="whatsapp" maxlength="40" value="${escapar(empresa?.whatsapp)}"></label>
+          <label class="cc-campo">Dirección<input name="direccion" maxlength="250" value="${escapar(empresa?.direccion)}"></label>
+          <label class="cc-campo">Estado<select name="estado">
+            <option value="pendiente" ${!empresa || empresa.estado==="pendiente"?"selected":""}>Pendiente</option>
+            <option value="activa" ${empresa?.estado==="activa"?"selected":""}>Activa</option>
+            <option value="suspendida" ${empresa?.estado==="suspendida"?"selected":""}>Suspendida</option>
+          </select></label>
+        </div>
+        <div id="ccEmpresaGuardarMensaje" class="cc-mensaje info"></div>
+        <div class="cc-acciones"><button class="back-home" type="submit" id="ccGuardarEmpresa">${editando?"Guardar cambios":"Registrar empresa"}</button><button class="logout" type="button" id="ccCancelarEmpresa">Cancelar</button></div>
+      </form>`;
+
+      const form = zona.querySelector("#ccFormEmpresa");
+      const btn = zona.querySelector("#ccGuardarEmpresa");
+      const msg = zona.querySelector("#ccEmpresaGuardarMensaje");
+      zona.querySelector("#ccCancelarEmpresa").onclick = () => zona.replaceChildren();
+
+      form.onsubmit = async ev => {
+        ev.preventDefault();
+        btn.disabled = true;
+        mensajeEn(msg, "Guardando en Supabase...");
+        const fd = new FormData(form);
+        const datos = {};
+        ["nombre_comercial","razon_social","nit","email","telefono","whatsapp","direccion","estado"].forEach(k => {
+          datos[k] = String(fd.get(k) || "").trim();
         });
+        if (!datos.nombre_comercial) {
+          mensajeEn(msg, "El nombre comercial es obligatorio.", "error");
+          btn.disabled = false; return;
+        }
+        try {
+          if (editando) {
+            await consultarSupabase(`/rest/v1/empresas?id=eq.${encodeURIComponent(empresa.id)}`, {
+              method:"PATCH", headers:{"Prefer":"return=minimal"}, body:JSON.stringify(datos)
+            });
+          } else {
+            datos.creado_por = usuarioActual.id;
+            await consultarSupabase("/rest/v1/empresas", {
+              method:"POST", headers:{"Prefer":"return=minimal"}, body:JSON.stringify(datos)
+            });
+          }
+          await cargarEmpresas(panel);
+        } catch(e) {
+          mensajeEn(msg, e.message, "error");
+          btn.disabled = false;
+        }
+      };
+    }
 
-        if (!respuesta.ok) {
-          const detalle = await respuesta.text();
-          let mensaje = detalle;
+    async function cargarCatalogos(panel) {
+      panel.innerHTML = `
+        <h3>Catálogos y servicios</h3>
+        <p>Administra el catálogo comercial de CLICK COMMERCE y asigna servicios a cada empresa cliente.</p>
+        <div id="ccServiciosMensaje" class="cc-mensaje info">Consultando servicios, empresas y asignaciones...</div>
+        <div id="ccServiciosContenido"></div>`;
 
+      try {
+        const resultados = await Promise.all([
+          consultarSupabase("/rest/v1/servicios?select=id,nombre,descripcion,tipo,precio_referencial,activo,creado_en&order=nombre.asc"),
+          consultarSupabase("/rest/v1/empresas?select=id,nombre_comercial,estado&order=nombre_comercial.asc"),
+          consultarSupabase("/rest/v1/empresa_servicios?select=id,empresa_id,servicio_id,estado,fecha_inicio,fecha_fin,precio_acordado,observaciones,creado_en&order=creado_en.desc")
+        ]);
+        serviciosCache = resultados[0];
+        empresasCache = resultados[1];
+        asignacionesCache = resultados[2];
+
+        if (!Array.isArray(serviciosCache) || !Array.isArray(empresasCache) || !Array.isArray(asignacionesCache)) {
+          throw new Error("Supabase no devolvió listas válidas.");
+        }
+        dibujarCatalogos(panel);
+      } catch(e) {
+        mensajeEn(panel.querySelector("#ccServiciosMensaje"), e.message, "error");
+        const btn = document.createElement("button");
+        btn.className = "back-home";
+        btn.textContent = "Volver a cargar";
+        btn.onclick = () => cargarCatalogos(panel);
+        panel.querySelector("#ccServiciosContenido").appendChild(btn);
+      }
+    }
+
+    function dibujarCatalogos(panel) {
+      const msg = panel.querySelector("#ccServiciosMensaje");
+      const zona = panel.querySelector("#ccServiciosContenido");
+      if (!msg || !zona) return;
+      mensajeEn(msg, `Conexión correcta. Servicios: ${serviciosCache.length} · Empresas: ${empresasCache.length} · Asignaciones: ${asignacionesCache.length}`, "ok");
+
+      zona.innerHTML = `
+        <div class="cc-bloque">
+          <div class="cc-acciones" style="justify-content:space-between">
+            <h3>Catálogo de servicios</h3>
+            <button type="button" class="back-home" id="ccNuevoServicio">+ Registrar servicio</button>
+          </div>
+          <p>Los servicios se guardan en la tabla <strong>servicios</strong>. Para conservar el historial, aquí se activan o desactivan; no se eliminan físicamente.</p>
+          <div id="ccFormServicioZona"></div>
+          <div id="ccTablaServicios"></div>
+        </div>
+        <div class="cc-bloque">
+          <div class="cc-acciones" style="justify-content:space-between">
+            <h3>Servicios contratados por empresa</h3>
+            <button type="button" class="back-home" id="ccNuevaAsignacion">+ Asignar servicio</button>
+          </div>
+          <p>La asignación vincula una empresa con un servicio, define el precio acordado y registra el estado del servicio.</p>
+          <div id="ccFormAsignacionZona"></div>
+          <div id="ccTablaAsignaciones"></div>
+        </div>`;
+
+      dibujarTablaServicios(zona);
+      dibujarTablaAsignaciones(zona);
+      zona.querySelector("#ccNuevoServicio").onclick = () => mostrarFormularioServicio(panel, null);
+      zona.querySelector("#ccNuevaAsignacion").onclick = () => mostrarFormularioAsignacion(panel, null);
+    }
+
+    function dibujarTablaServicios(zona) {
+      const tabla = zona.querySelector("#ccTablaServicios");
+      if (!serviciosCache.length) {
+        tabla.innerHTML = "<p>Aún no hay servicios registrados. Puedes crear el primero.</p>";
+        return;
+      }
+      tabla.innerHTML = `<div class="cc-tabla-contenedor"><table class="cc-tabla">
+        <thead><tr><th>Servicio</th><th>Tipo</th><th>Precio referencial</th><th>Estado</th><th>Acciones</th></tr></thead>
+        <tbody>${serviciosCache.map(s => `<tr>
+          <td><strong>${escapar(s.nombre)}</strong><div>${escapar(s.descripcion || "")}</div></td>
+          <td>${escapar(s.tipo)}</td>
+          <td>${s.precio_referencial == null ? "Sin definir" : "Bs " + escapar(Number(s.precio_referencial).toFixed(2))}</td>
+          <td><span class="cc-etiqueta">${s.activo ? "Activo" : "Inactivo"}</span></td>
+          <td>
+            <button type="button" class="cc-boton-secundario" data-editar-servicio="${escapar(s.id)}">Editar</button>
+            <button type="button" class="cc-boton-secundario" data-toggle-servicio="${escapar(s.id)}" data-activo="${s.activo ? "true" : "false"}">${s.activo ? "Desactivar" : "Activar"}</button>
+          </td>
+        </tr>`).join("")}</tbody></table></div>`;
+
+      tabla.querySelectorAll("[data-editar-servicio]").forEach(b => {
+        b.onclick = () => {
+          const s = serviciosCache.find(x => String(x.id) === b.dataset.editarServicio);
+          if (s) mostrarFormularioServicio(zona.closest(".placeholder"), s);
+        };
+      });
+      tabla.querySelectorAll("[data-toggle-servicio]").forEach(b => {
+        b.onclick = async () => {
+          const activo = b.dataset.activo === "true";
+          if (!confirm(`¿Deseas ${activo ? "desactivar" : "activar"} este servicio?`)) return;
+          b.disabled = true;
           try {
-            const datos = JSON.parse(detalle);
-            mensaje = datos.message || datos.msg || datos.details || detalle;
-          } catch {}
-
-          if (respuesta.status === 401) {
-            throw new Error("Tu sesión venció o no es válida. Inicia sesión nuevamente.");
+            await consultarSupabase(`/rest/v1/servicios?id=eq.${encodeURIComponent(b.dataset.toggleServicio)}`, {
+              method:"PATCH", headers:{"Prefer":"return=minimal"}, body:JSON.stringify({activo:!activo})
+            });
+            await cargarCatalogos(zona.closest(".placeholder"));
+          } catch(e) {
+            alert(e.message);
+            b.disabled = false;
           }
+        };
+      });
+    }
 
-          if (respuesta.status === 403) {
-            throw new Error("Supabase rechazó la operación por permisos. No se modificó la información.");
-          }
+    function mostrarFormularioServicio(panel, servicio) {
+      const zona = panel.querySelector("#ccFormServicioZona");
+      if (!zona) return;
+      const editando = Boolean(servicio);
+      zona.innerHTML = `<form id="ccFormServicio" style="padding:16px 0">
+        <h4>${editando ? "Editar servicio" : "Registrar servicio nuevo"}</h4>
+        <div class="cc-form-grid">
+          <label class="cc-campo">Nombre del servicio *<input name="nombre" required maxlength="180" value="${escapar(servicio?.nombre)}"></label>
+          <label class="cc-campo">Tipo<select name="tipo">
+            ${[
+              ["catalogo","Catálogo"],["sistema_ventas","Sistema de ventas"],["inventario","Inventario"],
+              ["finanzas","Finanzas"],["crm","CRM"],["otro","Otro"]
+            ].map(([v,t]) => `<option value="${v}" ${servicio?.tipo===v ? "selected" : ""}>${t}</option>`).join("")}
+          </select></label>
+          <label class="cc-campo">Precio referencial en Bs<input name="precio_referencial" type="number" min="0" step="0.01" value="${servicio?.precio_referencial ?? ""}" placeholder="Ej. 350"></label>
+          <label class="cc-campo">Estado<select name="activo"><option value="true" ${!servicio || servicio.activo ? "selected" : ""}>Activo</option><option value="false" ${servicio && !servicio.activo ? "selected" : ""}>Inactivo</option></select></label>
+          <label class="cc-campo" style="grid-column:1/-1">Descripción<textarea name="descripcion" rows="3" maxlength="2000">${escapar(servicio?.descripcion)}</textarea></label>
+        </div>
+        <div id="ccGuardarServicioMensaje" class="cc-mensaje info"></div>
+        <div class="cc-acciones"><button type="submit" class="back-home" id="ccGuardarServicio">${editando ? "Guardar cambios" : "Registrar servicio"}</button><button type="button" class="logout" id="ccCancelarServicio">Cancelar</button></div>
+      </form>`;
 
-          throw new Error(`Error de Supabase (HTTP ${respuesta.status}): ${mensaje.slice(0, 350)}`);
+      const form = zona.querySelector("#ccFormServicio");
+      const btn = zona.querySelector("#ccGuardarServicio");
+      const msg = zona.querySelector("#ccGuardarServicioMensaje");
+      zona.querySelector("#ccCancelarServicio").onclick = () => zona.replaceChildren();
+
+      form.onsubmit = async ev => {
+        ev.preventDefault();
+        btn.disabled = true;
+        mensajeEn(msg, "Guardando servicio...");
+        const fd = new FormData(form);
+        const nombre = String(fd.get("nombre") || "").trim();
+        const precioTexto = String(fd.get("precio_referencial") || "").trim();
+        if (!nombre) {
+          mensajeEn(msg, "El nombre del servicio es obligatorio.", "error");
+          btn.disabled = false; return;
+        }
+        if (precioTexto !== "" && (!Number.isFinite(Number(precioTexto)) || Number(precioTexto) < 0)) {
+          mensajeEn(msg, "El precio debe ser un número igual o mayor a cero.", "error");
+          btn.disabled = false; return;
         }
 
-        if (respuesta.status === 204) return null;
+        const datos = {
+          nombre,
+          tipo:String(fd.get("tipo")),
+          descripcion:String(fd.get("descripcion") || "").trim() || null,
+          precio_referencial:precioTexto === "" ? null : Number(precioTexto),
+          activo:fd.get("activo") === "true"
+        };
+        try {
+          if (editando) {
+            await consultarSupabase(`/rest/v1/servicios?id=eq.${encodeURIComponent(servicio.id)}`, {
+              method:"PATCH", headers:{"Prefer":"return=minimal"}, body:JSON.stringify(datos)
+            });
+          } else {
+            await consultarSupabase("/rest/v1/servicios", {
+              method:"POST", headers:{"Prefer":"return=minimal"}, body:JSON.stringify(datos)
+            });
+          }
+          await cargarCatalogos(panel);
+        } catch(e) {
+          mensajeEn(msg, e.message, "error");
+          btn.disabled = false;
+        }
+      };
+    }
 
-        const texto = await respuesta.text();
-        return texto ? JSON.parse(texto) : null;
+    function nombreEmpresa(id) {
+      const e = empresasCache.find(x => String(x.id) === String(id));
+      return e ? e.nombre_comercial : "Empresa no encontrada";
+    }
+
+    function nombreServicio(id) {
+      const s = serviciosCache.find(x => String(x.id) === String(id));
+      return s ? s.nombre : "Servicio no encontrado";
+    }
+
+    function dibujarTablaAsignaciones(zona) {
+      const tabla = zona.querySelector("#ccTablaAsignaciones");
+      if (!asignacionesCache.length) {
+        tabla.innerHTML = "<p>Aún no hay servicios asignados a empresas.</p>";
+        return;
+      }
+      tabla.innerHTML = `<div class="cc-tabla-contenedor"><table class="cc-tabla">
+        <thead><tr><th>Empresa</th><th>Servicio</th><th>Precio acordado</th><th>Estado</th><th>Fechas</th><th>Acciones</th></tr></thead>
+        <tbody>${asignacionesCache.map(a => `<tr>
+          <td>${escapar(nombreEmpresa(a.empresa_id))}</td>
+          <td>${escapar(nombreServicio(a.servicio_id))}</td>
+          <td>${a.precio_acordado == null ? "Sin definir" : "Bs " + escapar(Number(a.precio_acordado).toFixed(2))}</td>
+          <td>${escapar(a.estado)}</td>
+          <td>Inicio: ${escapar(a.fecha_inicio || "—")}<br>Fin: ${escapar(a.fecha_fin || "—")}</td>
+          <td><button type="button" class="cc-boton-secundario" data-editar-asignacion="${escapar(a.id)}">Editar</button></td>
+        </tr>`).join("")}</tbody></table></div>`;
+
+      tabla.querySelectorAll("[data-editar-asignacion]").forEach(b => {
+        b.onclick = () => {
+          const a = asignacionesCache.find(x => String(x.id) === b.dataset.editarAsignacion);
+          if (a) mostrarFormularioAsignacion(zona.closest(".placeholder"), a);
+        };
+      });
+    }
+
+    function mostrarFormularioAsignacion(panel, asignacion) {
+      const zona = panel.querySelector("#ccFormAsignacionZona");
+      if (!zona) return;
+      const editando = Boolean(asignacion);
+
+      if (!empresasCache.length) {
+        zona.innerHTML = "<p>Primero registra una empresa en el módulo Empresas.</p>";
+        return;
+      }
+      if (!serviciosCache.length) {
+        zona.innerHTML = "<p>Primero registra un servicio en el catálogo de servicios.</p>";
+        return;
       }
 
-      function crearPie() {
-        const pie = document.createElement("div");
-        pie.className = "footer";
-        pie.textContent = "© 2026 CLICK COMMERCE · Gestión empresarial";
-        return pie;
-      }
+      const empresasOpciones = empresasCache.map(e =>
+        `<option value="${escapar(e.id)}" ${String(asignacion?.empresa_id)===String(e.id)?"selected":""}>${escapar(e.nombre_comercial)}</option>`
+      ).join("");
+      const serviciosOpciones = serviciosCache.map(s =>
+        `<option value="${escapar(s.id)}" ${String(asignacion?.servicio_id)===String(s.id)?"selected":""}>${escapar(s.nombre)}${s.activo ? "" : " (inactivo)"}</option>`
+      ).join("");
 
-      function mostrarInicio() {
-        location.reload();
-      }
+      zona.innerHTML = `<form id="ccFormAsignacion" style="padding:16px 0">
+        <h4>${editando ? "Editar asignación" : "Asignar un servicio a una empresa"}</h4>
+        <div class="cc-form-grid">
+          <label class="cc-campo">Empresa cliente *<select name="empresa_id" required>${empresasOpciones}</select></label>
+          <label class="cc-campo">Servicio *<select name="servicio_id" required>${serviciosOpciones}</select></label>
+          <label class="cc-campo">Estado<select name="estado">
+            ${["pendiente","activo","suspendido","finalizado"].map(v => `<option value="${v}" ${asignacion?.estado===v || (!asignacion && v==="pendiente")?"selected":""}>${v[0].toUpperCase()+v.slice(1)}</option>`).join("")}
+          </select></label>
+          <label class="cc-campo">Precio acordado en Bs<input name="precio_acordado" type="number" min="0" step="0.01" value="${asignacion?.precio_acordado ?? ""}" placeholder="Precio pactado con el cliente"></label>
+          <label class="cc-campo">Fecha de inicio<input name="fecha_inicio" type="date" value="${escapar(asignacion?.fecha_inicio || "")}"></label>
+          <label class="cc-campo">Fecha de finalización<input name="fecha_fin" type="date" value="${escapar(asignacion?.fecha_fin || "")}"></label>
+          <label class="cc-campo" style="grid-column:1/-1">Observaciones<textarea name="observaciones" rows="3" maxlength="2000">${escapar(asignacion?.observaciones)}</textarea></label>
+        </div>
+        <div id="ccGuardarAsignacionMensaje" class="cc-mensaje info"></div>
+        <div class="cc-acciones"><button type="submit" class="back-home" id="ccGuardarAsignacion">${editando ? "Guardar cambios" : "Asignar servicio"}</button><button type="button" class="logout" id="ccCancelarAsignacion">Cancelar</button></div>
+      </form>`;
 
-      function mostrarSeccion(seccion) {
-        if (!titulos[seccion]) return;
+      const form = zona.querySelector("#ccFormAsignacion");
+      const btn = zona.querySelector("#ccGuardarAsignacion");
+      const msg = zona.querySelector("#ccGuardarAsignacionMensaje");
+      zona.querySelector("#ccCancelarAsignacion").onclick = () => zona.replaceChildren();
 
-        document.getElementById("pageTitle").textContent = titulos[seccion];
+      form.onsubmit = async ev => {
+        ev.preventDefault();
+        btn.disabled = true;
+        mensajeEn(msg, "Guardando asignación...");
+        const fd = new FormData(form);
+        const precioTexto = String(fd.get("precio_acordado") || "").trim();
+        if (precioTexto !== "" && (!Number.isFinite(Number(precioTexto)) || Number(precioTexto) < 0)) {
+          mensajeEn(msg, "El precio acordado debe ser igual o mayor a cero.", "error");
+          btn.disabled = false; return;
+        }
+        const inicio = String(fd.get("fecha_inicio") || "").trim();
+        const fin = String(fd.get("fecha_fin") || "").trim();
+        if (inicio && fin && fin < inicio) {
+          mensajeEn(msg, "La fecha final no puede ser anterior a la fecha de inicio.", "error");
+          btn.disabled = false; return;
+        }
 
-        document.querySelectorAll("#menu button").forEach(boton => {
-          boton.classList.toggle("active", boton.dataset.section === seccion);
+        const datos = {
+          empresa_id:String(fd.get("empresa_id")),
+          servicio_id:String(fd.get("servicio_id")),
+          estado:String(fd.get("estado")),
+          precio_acordado:precioTexto === "" ? null : Number(precioTexto),
+          fecha_inicio:inicio || null,
+          fecha_fin:fin || null,
+          observaciones:String(fd.get("observaciones") || "").trim() || null
+        };
+
+        try {
+          if (editando) {
+            await consultarSupabase(`/rest/v1/empresa_servicios?id=eq.${encodeURIComponent(asignacion.id)}`, {
+              method:"PATCH", headers:{"Prefer":"return=minimal"}, body:JSON.stringify(datos)
+            });
+          } else {
+            await consultarSupabase("/rest/v1/empresa_servicios", {
+              method:"POST", headers:{"Prefer":"return=minimal"}, body:JSON.stringify(datos)
+            });
+          }
+          await cargarCatalogos(panel);
+        } catch(e) {
+          if (String(e.message).toLowerCase().includes("duplicate") || String(e.message).includes("23505")) {
+            mensajeEn(msg, "Esta empresa ya tiene asignado ese servicio. Edita la asignación existente en la tabla inferior.", "error");
+          } else {
+            mensajeEn(msg, e.message, "error");
+          }
+          btn.disabled = false;
+        }
+      };
+    }
+
+    function mostrarError(mensaje, permitirReintento=true) {
+      aplicacion.hidden = true;
+      guardia.hidden = false;
+      mensajeGuardia.className = "guardia-error";
+      mensajeGuardia.textContent = mensaje;
+      botonReintentar.hidden = !permitirReintento;
+      botonVolver.hidden = false;
+    }
+
+    async function verificarAcceso() {
+      botonReintentar.disabled = true;
+      botonReintentar.hidden = true;
+      botonVolver.hidden = true;
+      guardia.hidden = false;
+      aplicacion.hidden = true;
+      mensajeGuardia.className = "";
+      mensajeGuardia.textContent = "Verificando tu sesión y los permisos de acceso...";
+
+      try {
+        const guardado = sessionStorage.getItem("clickCommerceSession");
+        if (!guardado) throw new Error("No se encontró una sesión. Vuelve al acceso e inicia sesión.");
+
+        try { sesionActual = JSON.parse(guardado); }
+        catch { throw new Error("La sesión guardada no se puede leer. Vuelve al acceso."); }
+
+        if (!sesionActual?.access_token) throw new Error("La sesión no contiene un token válido. Vuelve al acceso.");
+
+        const respuestaUsuario = await fetch(`${SUPABASE_URL}/auth/v1/user`, {
+          method:"GET",
+          headers:{apikey:SUPABASE_KEY,Authorization:`Bearer ${sesionActual.access_token}`}
         });
+        if (!respuestaUsuario.ok) throw new Error("La sesión venció o no es válida. Inicia sesión nuevamente.");
 
-        if (seccion === "inicio") {
-          mostrarInicio();
+        usuarioActual = await respuestaUsuario.json();
+        if (!usuarioActual?.id) throw new Error("No se pudo verificar la identidad del usuario.");
+
+        const respuestaRol = await consultarSupabase("/rest/v1/rpc/cc_es_superadmin", {
+          method:"POST", body:"{}"
+        });
+        if (respuestaRol !== true) {
+          mostrarError("Supabase no reconoce esta sesión como superadministradora. El panel permanecerá bloqueado.", false);
           return;
         }
 
-        const contenido = document.getElementById("content");
-        const panel = document.createElement("section");
-        panel.className = "placeholder";
-
-        const titulo = document.createElement("h3");
-        titulo.textContent = titulos[seccion];
-        panel.appendChild(titulo);
-
-        const descripcion = document.createElement("p");
-        descripcion.textContent = seccion === "empresas"
-          ? "Registra, consulta y actualiza las empresas que administras."
-          : (descripciones[seccion] || "");
-        panel.appendChild(descripcion);
-
-        contenido.replaceChildren(panel, crearPie());
-
-        if (seccion === "empresas") {
-          cargarEmpresas(panel);
-          return;
-        }
-
-        const aviso = document.createElement("p");
-        aviso.textContent = "Este módulo se conectará paso a paso, manteniendo los permisos de acceso.";
-        panel.appendChild(aviso);
-
-        const volver = document.createElement("button");
-        volver.className = "back-home";
-        volver.textContent = "Volver al panel principal";
-        volver.addEventListener("click", mostrarInicio);
-        panel.appendChild(volver);
+        document.getElementById("ccIdentidad").textContent = usuarioActual.email || "Usuario autenticado";
+        document.getElementById("ccNombreRol").textContent = "Superadministradora";
+        document.getElementById("ccEstadoPanel").textContent = "Acceso verificado";
+        document.getElementById("ccPuntoEstado").classList.add("ok");
+        guardia.hidden = true;
+        aplicacion.hidden = false;
+      } catch(e) {
+        mostrarError(e.message || "No se pudo verificar el acceso.");
+      } finally {
+        botonReintentar.disabled = false;
       }
+    }
 
-      async function cargarEmpresas(panel) {
-        panel.innerHTML = `
-          <h3>Gestión de empresas</h3>
-          <p>Registra y administra las empresas clientes de CLICK COMMERCE.</p>
-          <div id="ccEmpresaMensaje" class="cc-mensaje info" role="status" aria-live="polite">
-            Cargando empresas desde Supabase...
-          </div>
-          <div id="ccEmpresaContenido"></div>
-        `;
+    document.querySelectorAll("#menu button").forEach(b => {
+      b.addEventListener("click", () => mostrarSeccion(b.dataset.section));
+    });
+    document.querySelectorAll("[data-open]").forEach(b => {
+      b.addEventListener("click", () => mostrarSeccion(b.dataset.open));
+    });
+    document.getElementById("logout").addEventListener("click", () => {
+      sessionStorage.removeItem("clickCommerceSession");
+      window.location.href = "./";
+    });
+    botonVolver.addEventListener("click", () => {
+      sessionStorage.removeItem("clickCommerceSession");
+      window.location.href = "./";
+    });
+    botonReintentar.addEventListener("click", verificarAcceso);
 
-        try {
-          empresasCache = await consultarSupabase(
-            "/rest/v1/empresas?select=id,nombre_comercial,razon_social,nit,email,telefono,whatsapp,direccion,estado,fecha_registro&order=fecha_registro.desc"
-          );
-
-          if (!Array.isArray(empresasCache)) {
-            throw new Error("Supabase no devolvió una lista válida de empresas.");
-          }
-
-          dibujarEmpresas(panel);
-        } catch (error) {
-          const mensaje = panel.querySelector("#ccEmpresaMensaje");
-          const contenido = panel.querySelector("#ccEmpresaContenido");
-
-          if (mensaje) {
-            mensaje.className = "cc-mensaje error";
-            mensaje.textContent = error.message;
-          }
-
-          if (contenido) {
-            const reintentar = document.createElement("button");
-            reintentar.type = "button";
-            reintentar.className = "back-home";
-            reintentar.textContent = "Volver a cargar";
-            reintentar.addEventListener("click", () => cargarEmpresas(panel));
-            contenido.appendChild(reintentar);
-          }
-        }
-      }
-
-      function dibujarEmpresas(panel) {
-        const mensaje = panel.querySelector("#ccEmpresaMensaje");
-        const contenido = panel.querySelector("#ccEmpresaContenido");
-        if (!mensaje || !contenido) return;
-
-        mensaje.className = "cc-mensaje ok";
-        mensaje.textContent = `Conexión correcta. Empresas encontradas: ${empresasCache.length}`;
-
-        contenido.innerHTML = `
-          <div style="display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;margin:20px 0;">
-            <h3 style="margin:0;">Empresas registradas</h3>
-            <button type="button" class="back-home" id="ccNuevaEmpresa">+ Registrar empresa</button>
-          </div>
-          <div id="ccFormularioEmpresa"></div>
-          <div id="ccTablaEmpresas"></div>
-        `;
-
-        const tabla = contenido.querySelector("#ccTablaEmpresas");
-
-        if (empresasCache.length === 0) {
-          tabla.innerHTML = `
-            <div style="padding:18px;border:1px solid #DCE2EA;border-radius:8px;background:#F8FAFC;">
-              Todavía no hay empresas registradas. Puedes registrar la primera.
-            </div>
-          `;
-        } else {
-          tabla.innerHTML = `
-            <div class="cc-tabla-contenedor">
-              <table class="cc-tabla">
-                <thead>
-                  <tr>
-                    <th>Empresa</th>
-                    <th>NIT</th>
-                    <th>Contacto</th>
-                    <th>Estado</th>
-                    <th>Acciones</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  ${empresasCache.map(empresa => `
-                    <tr>
-                      <td>
-                        <strong>${escapar(empresa.nombre_comercial)}</strong>
-                        <div style="font-size:13px;color:#738096;margin-top:4px;">
-                          ${escapar(empresa.razon_social || "Sin razón social")}
-                        </div>
-                      </td>
-                      <td>${escapar(empresa.nit || "—")}</td>
-                      <td>
-                        ${escapar(empresa.telefono || empresa.whatsapp || "—")}
-                        <div style="font-size:13px;color:#738096;margin-top:4px;">
-                          ${escapar(empresa.email || "")}
-                        </div>
-                      </td>
-                      <td>${escapar(empresa.estado || "pendiente")}</td>
-                      <td>
-                        <button type="button" class="cc-boton-secundario"
-                          data-editar="${escapar(empresa.id)}">Editar</button>
-                      </td>
-                    </tr>
-                  `).join("")}
-                </tbody>
-              </table>
-            </div>
-          `;
-        }
-
-        contenido.querySelector("#ccNuevaEmpresa").addEventListener("click", () => {
-          mostrarFormulario(panel, null);
-        });
-
-        contenido.querySelectorAll("[data-editar]").forEach(boton => {
-          boton.addEventListener("click", () => {
-            const empresa = empresasCache.find(
-              item => String(item.id) === boton.dataset.editar
-            );
-            if (empresa) mostrarFormulario(panel, empresa);
-          });
-        });
-      }
-
-      function mostrarFormulario(panel, empresa) {
-        const zona = panel.querySelector("#ccFormularioEmpresa");
-        if (!zona) return;
-
-        const editando = Boolean(empresa);
-
-        zona.innerHTML = `
-          <form id="ccFormulario" style="margin:15px 0 24px;padding:20px;border:1px solid #DCE2EA;border-radius:10px;background:#F8FAFC;">
-            <h3 style="margin-top:0;">${editando ? "Editar empresa" : "Registrar nueva empresa"}</h3>
-
-            <div class="cc-form-grid">
-              <label class="cc-campo">Nombre comercial *
-                <input name="nombre_comercial" required maxlength="180"
-                  value="${escapar(empresa?.nombre_comercial)}">
-              </label>
-
-              <label class="cc-campo">Razón social
-                <input name="razon_social" maxlength="200"
-                  value="${escapar(empresa?.razon_social)}">
-              </label>
-
-              <label class="cc-campo">NIT
-                <input name="nit" maxlength="40"
-                  value="${escapar(empresa?.nit)}">
-              </label>
-
-              <label class="cc-campo">Correo electrónico
-                <input name="email" type="email" maxlength="180"
-                  value="${escapar(empresa?.email)}">
-              </label>
-
-              <label class="cc-campo">Teléfono
-                <input name="telefono" maxlength="40"
-                  value="${escapar(empresa?.telefono)}">
-              </label>
-
-              <label class="cc-campo">WhatsApp
-                <input name="whatsapp" maxlength="40"
-                  value="${escapar(empresa?.whatsapp)}">
-              </label>
-
-              <label class="cc-campo">Dirección
-                <input name="direccion" maxlength="250"
-                  value="${escapar(empresa?.direccion)}">
-              </label>
-
-              <label class="cc-campo">Estado
-                <select name="estado">
-                  <option value="pendiente" ${!empresa || empresa.estado === "pendiente" ? "selected" : ""}>Pendiente</option>
-                  <option value="activa" ${empresa?.estado === "activa" ? "selected" : ""}>Activa</option>
-                  <option value="suspendida" ${empresa?.estado === "suspendida" ? "selected" : ""}>Suspendida</option>
-                </select>
-              </label>
-            </div>
-
-            <div id="ccGuardarMensaje" class="cc-mensaje info" role="status" aria-live="polite"></div>
-
-            <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:12px;">
-              <button type="submit" class="back-home" id="ccGuardarEmpresa">
-                ${editando ? "Guardar cambios" : "Registrar empresa"}
-              </button>
-              <button type="button" class="logout" id="ccCancelarEmpresa">Cancelar</button>
-            </div>
-          </form>
-        `;
-
-        const formulario = zona.querySelector("#ccFormulario");
-        const botonGuardar = zona.querySelector("#ccGuardarEmpresa");
-        const mensaje = zona.querySelector("#ccGuardarMensaje");
-
-        zona.querySelector("#ccCancelarEmpresa").addEventListener("click", () => {
-          zona.replaceChildren();
-        });
-
-        formulario.addEventListener("submit", async evento => {
-          evento.preventDefault();
-          botonGuardar.disabled = true;
-          mensaje.className = "cc-mensaje info";
-          mensaje.textContent = "Guardando en Supabase...";
-
-          const formularioDatos = new FormData(formulario);
-          const datos = {};
-
-          [
-            "nombre_comercial", "razon_social", "nit", "email",
-            "telefono", "whatsapp", "direccion", "estado"
-          ].forEach(campo => {
-            datos[campo] = String(formularioDatos.get(campo) || "").trim();
-          });
-
-          if (!datos.nombre_comercial) {
-            mensaje.className = "cc-mensaje error";
-            mensaje.textContent = "El nombre comercial es obligatorio.";
-            botonGuardar.disabled = false;
-            return;
-          }
-
-          try {
-            if (editando) {
-              await consultarSupabase(
-                `/rest/v1/empresas?id=eq.${encodeURIComponent(empresa.id)}`,
-                {
-                  method: "PATCH",
-                  headers: { "Prefer": "return=minimal" },
-                  body: JSON.stringify(datos)
-                }
-              );
-            } else {
-              datos.creado_por = usuarioActual.id;
-
-              await consultarSupabase("/rest/v1/empresas", {
-                method: "POST",
-                headers: { "Prefer": "return=minimal" },
-                body: JSON.stringify(datos)
-              });
-            }
-
-            await cargarEmpresas(panel);
-          } catch (error) {
-            mensaje.className = "cc-mensaje error";
-            mensaje.textContent = error.message;
-            botonGuardar.disabled = false;
-          }
-        });
-      }
-
-      async function verificarAcceso() {
-        botonReintentar.disabled = true;
-        botonReintentar.hidden = true;
-        botonVolver.hidden = true;
-        guardia.hidden = false;
-        aplicacion.hidden = true;
-
-        mensajeGuardia.className = "guardia-mensaje";
-        mensajeGuardia.textContent = "Verificando tu sesión y los permisos de acceso...";
-
-        try {
-          const guardado = sessionStorage.getItem("clickCommerceSession");
-
-          if (!guardado) {
-            throw new Error("No se encontró una sesión. Vuelve al acceso e inicia sesión.");
-          }
-
-          try {
-            sesionActual = JSON.parse(guardado);
-          } catch {
-            throw new Error("La sesión guardada no se puede leer. Vuelve al acceso.");
-          }
-
-          if (!sesionActual?.access_token) {
-            throw new Error("La sesión no contiene un token válido. Vuelve al acceso.");
-          }
-
-          const respuestaUsuario = await fetch(`${SUPABASE_URL}/auth/v1/user`, {
-            method: "GET",
-            headers: {
-              "apikey": SUPABASE_KEY,
-              "Authorization": `Bearer ${sesionActual.access_token}`
-            }
-          });
-
-          if (!respuestaUsuario.ok) {
-            throw new Error("La sesión venció o no es válida. Inicia sesión nuevamente.");
-          }
-
-          usuarioActual = await respuestaUsuario.json();
-
-          if (!usuarioActual?.id) {
-            throw new Error("No se pudo verificar la identidad del usuario.");
-          }
-
-          const respuestaRol = await consultarSupabase(
-            "/rest/v1/rpc/cc_es_superadmin",
-            { method: "POST", body: "{}" }
-          );
-
-          if (respuestaRol !== true) {
-            mostrarError(
-              "Supabase no reconoce esta sesión como superadministradora. El panel permanecerá bloqueado.",
-              false
-            );
-            return;
-          }
-
-          document.getElementById("ccIdentidad").textContent =
-            usuarioActual.email || "Usuario autenticado";
-          document.getElementById("ccNombreRol").textContent = "Superadministradora";
-          document.getElementById("ccEstadoPanel").textContent = "Acceso verificado";
-          document.getElementById("ccPuntoEstado").classList.add("ok");
-
-          guardia.hidden = true;
-          aplicacion.hidden = false;
-
-        } catch (error) {
-          mostrarError(error.message || "No se pudo verificar el acceso.");
-        } finally {
-          botonReintentar.disabled = false;
-        }
-      }
-
-      document.querySelectorAll("#menu button").forEach(boton => {
-        boton.addEventListener("click", () => mostrarSeccion(boton.dataset.section));
-      });
-
-      document.querySelectorAll("[data-open]").forEach(boton => {
-        boton.addEventListener("click", () => mostrarSeccion(boton.dataset.open));
-      });
-
-      document.getElementById("logout").addEventListener("click", () => {
-        sessionStorage.removeItem("clickCommerceSession");
-        window.location.href = "./";
-      });
-
-      botonVolver.addEventListener("click", () => {
-        sessionStorage.removeItem("clickCommerceSession");
-        window.location.href = "./";
-      });
-
-      botonReintentar.addEventListener("click", verificarAcceso);
-
-      verificarAcceso();
-    })();
+    verificarAcceso();
+  })();
   </script>
 </body>
 </html>
