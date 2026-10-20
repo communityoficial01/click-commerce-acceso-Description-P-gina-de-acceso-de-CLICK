@@ -24,7 +24,7 @@
 
     * { box-sizing: border-box; }
 
-    html, body, button {
+    html, body, button, input, select {
       font-family: "Times New Roman", Times, serif;
     }
 
@@ -35,16 +35,10 @@
     }
 
     button { cursor: pointer; }
+    button:disabled { cursor: not-allowed; opacity: .6; }
+    [hidden] { display: none !important; }
 
-    button:disabled {
-      cursor: not-allowed;
-      opacity: .6;
-    }
-
-    .app {
-      min-height: 100vh;
-      display: flex;
-    }
+    .app { min-height: 100vh; display: flex; }
 
     .sidebar {
       width: 255px;
@@ -77,17 +71,8 @@
       text-align: center;
     }
 
-    .brand h1 {
-      margin: 0;
-      font-size: 20px;
-      color: white;
-    }
-
-    .brand p {
-      margin: 5px 0 0;
-      font-size: 12px;
-      color: #D6DCE6;
-    }
+    .brand h1 { margin: 0; font-size: 20px; color: white; }
+    .brand p { margin: 5px 0 0; font-size: 12px; color: #D6DCE6; }
 
     .menu-label {
       margin: 25px 10px 10px;
@@ -97,10 +82,7 @@
       letter-spacing: 1px;
     }
 
-    .nav {
-      display: grid;
-      gap: 5px;
-    }
+    .nav { display: grid; gap: 5px; }
 
     .nav button {
       width: 100%;
@@ -116,18 +98,13 @@
       font-size: 16px;
     }
 
-    .nav button:hover,
-    .nav button.active {
+    .nav button:hover, .nav button.active {
       background: var(--azul-claro);
       border-color: #D9B45B66;
       color: var(--dorado);
     }
 
-    .nav-icon {
-      width: 22px;
-      text-align: center;
-      font-size: 18px;
-    }
+    .nav-icon { width: 22px; text-align: center; font-size: 18px; }
 
     .sidebar-bottom {
       margin-top: auto;
@@ -148,10 +125,7 @@
       font-size: 16px;
     }
 
-    .main {
-      min-width: 0;
-      flex: 1;
-    }
+    .main { min-width: 0; flex: 1; }
 
     .topbar {
       background: white;
@@ -164,23 +138,10 @@
       border-bottom: 1px solid var(--borde);
     }
 
-    .topbar h2 {
-      margin: 0;
-      font-size: 24px;
-      color: var(--azul);
-    }
+    .topbar h2 { margin: 0; font-size: 24px; color: var(--azul); }
+    .topbar p { margin: 5px 0 0; color: var(--gris); font-size: 14px; }
 
-    .topbar p {
-      margin: 5px 0 0;
-      color: var(--gris);
-      font-size: 14px;
-    }
-
-    .top-actions {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
+    .top-actions { display: flex; align-items: center; gap: 12px; }
 
     .status {
       display: flex;
@@ -238,11 +199,7 @@
       pointer-events: none;
     }
 
-    .welcome h3 {
-      margin: 0 0 9px;
-      font-size: 27px;
-      color: var(--dorado);
-    }
+    .welcome h3 { margin: 0 0 9px; font-size: 27px; color: var(--dorado); }
 
     .welcome p {
       margin: 0;
@@ -260,17 +217,8 @@
       margin: 28px 0 16px;
     }
 
-    .section-heading h3 {
-      margin: 0;
-      color: var(--azul);
-      font-size: 21px;
-    }
-
-    .section-heading p {
-      color: var(--gris);
-      font-size: 14px;
-      margin: 5px 0 0;
-    }
+    .section-heading h3 { margin: 0; color: var(--azul); font-size: 21px; }
+    .section-heading p { color: var(--gris); font-size: 14px; margin: 5px 0 0; }
 
     .cards {
       display: grid;
@@ -286,17 +234,8 @@
       min-height: 135px;
     }
 
-    .stat-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .stat-title {
-      color: var(--gris);
-      font-size: 15px;
-    }
+    .stat-top { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+    .stat-title { color: var(--gris); font-size: 15px; }
 
     .stat-icon {
       width: 38px;
@@ -309,18 +248,8 @@
       font-size: 20px;
     }
 
-    .stat-value {
-      margin-top: 18px;
-      color: var(--azul);
-      font-size: 21px;
-      font-weight: bold;
-    }
-
-    .stat-note {
-      margin-top: 6px;
-      color: var(--gris);
-      font-size: 13px;
-    }
+    .stat-value { margin-top: 18px; color: var(--azul); font-size: 21px; font-weight: bold; }
+    .stat-note { margin-top: 6px; color: var(--gris); font-size: 13px; }
 
     .module-grid {
       display: grid;
@@ -351,11 +280,7 @@
       margin-bottom: 15px;
     }
 
-    .module h4 {
-      margin: 0 0 8px;
-      color: var(--azul);
-      font-size: 19px;
-    }
+    .module h4 { margin: 0 0 8px; color: var(--azul); font-size: 19px; }
 
     .module p {
       color: var(--gris);
@@ -397,16 +322,8 @@
       min-height: 220px;
     }
 
-    .placeholder h3 {
-      color: var(--azul);
-      font-size: 23px;
-      margin-top: 0;
-    }
-
-    .placeholder p {
-      color: var(--gris);
-      line-height: 1.6;
-    }
+    .placeholder h3 { color: var(--azul); font-size: 23px; margin-top: 0; }
+    .placeholder p { color: var(--gris); line-height: 1.6; }
 
     .back-home {
       margin-top: 12px;
@@ -418,14 +335,8 @@
       font-size: 15px;
     }
 
-    .footer {
-      color: var(--gris);
-      text-align: center;
-      font-size: 13px;
-      padding: 28px 10px 12px;
-    }
+    .footer { color: var(--gris); text-align: center; font-size: 13px; padding: 28px 10px 12px; }
 
-    /* Pantalla de verificación de acceso */
     .guardia {
       position: fixed;
       inset: 0;
@@ -438,8 +349,6 @@
       padding: 22px;
     }
 
-    .guardia[hidden] { display: none; }
-
     .guardia-card {
       width: min(460px, 100%);
       padding: 30px;
@@ -449,32 +358,51 @@
       text-align: center;
     }
 
-    .guardia-card h1 {
-      color: var(--dorado);
-      font-size: 25px;
-      margin: 0 0 14px;
-    }
-
-    .guardia-card p {
-      font-size: 16px;
-      line-height: 1.6;
-      overflow-wrap: anywhere;
-    }
-
-    .guardia-boton {
-      margin-top: 12px;
-      padding: 11px 18px;
-      border: 0;
-      border-radius: 7px;
-      background: var(--dorado);
-      color: var(--azul);
-      font-weight: bold;
-      font-size: 16px;
-    }
-
+    .guardia-card h1 { color: var(--dorado); font-size: 25px; margin: 0 0 14px; }
+    .guardia-card p { font-size: 16px; line-height: 1.6; overflow-wrap: anywhere; }
+    .guardia-boton { margin-top: 12px; padding: 11px 18px; border: 0; border-radius: 7px; background: var(--dorado); color: var(--azul); font-weight: bold; font-size: 16px; }
     .guardia-mensaje { color: #E7EDF5; }
     .guardia-error { color: #FFB3B3; }
-    .guardia-ok { color: #9EE6AE; }
+
+    .cc-form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+      margin-top: 15px;
+    }
+
+    .cc-campo { display: block; color: var(--azul); font-weight: bold; }
+    .cc-campo input, .cc-campo select {
+      display: block;
+      width: 100%;
+      padding: 11px;
+      margin-top: 6px;
+      border: 1px solid var(--borde);
+      border-radius: 6px;
+      background: white;
+      color: var(--texto);
+      font-size: 16px;
+    }
+
+    .cc-tabla-contenedor { width: 100%; overflow-x: auto; margin-top: 18px; }
+    .cc-tabla { width: 100%; border-collapse: collapse; background: white; }
+    .cc-tabla th { background: var(--azul); color: white; text-align: left; padding: 12px; }
+    .cc-tabla td { padding: 12px; border-bottom: 1px solid var(--borde); vertical-align: top; }
+    .cc-tabla tr:hover td { background: #FAFBFD; }
+
+    .cc-boton-secundario {
+      padding: 8px 10px;
+      border: 1px solid var(--dorado);
+      border-radius: 6px;
+      background: white;
+      color: var(--azul);
+      font-size: 15px;
+    }
+
+    .cc-mensaje { padding: 12px 0; line-height: 1.5; overflow-wrap: anywhere; }
+    .cc-mensaje.ok { color: var(--verde); }
+    .cc-mensaje.error { color: var(--rojo); }
+    .cc-mensaje.info { color: var(--gris); }
 
     @media (max-width: 1100px) {
       .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -496,24 +424,20 @@
       .welcome { padding: 22px 20px; }
       .welcome h3 { font-size: 23px; }
       .cards, .module-grid { grid-template-columns: 1fr; }
+      .placeholder { padding: 18px; }
     }
   </style>
 </head>
 
 <body>
-  <!-- Esta pantalla bloquea el panel hasta verificar sesión y rol. -->
   <div class="guardia" id="ccGuardia">
     <div class="guardia-card">
       <h1>CLICK COMMERCE</h1>
       <p class="guardia-mensaje" id="ccGuardiaMensaje">
         Verificando tu sesión y los permisos de acceso...
       </p>
-      <button class="guardia-boton" id="ccReintentar" hidden>
-        Volver a verificar
-      </button>
-      <button class="guardia-boton" id="ccVolverAcceso" hidden>
-        Volver al acceso
-      </button>
+      <button class="guardia-boton" id="ccReintentar" hidden>Volver a verificar</button>
+      <button class="guardia-boton" id="ccVolverAcceso" hidden>Volver al acceso</button>
     </div>
   </div>
 
@@ -530,30 +454,14 @@
       <div class="menu-label">Menú principal</div>
 
       <nav class="nav" id="menu">
-        <button class="active" data-section="inicio">
-          <span class="nav-icon">⌂</span> Inicio
-        </button>
-        <button data-section="empresas">
-          <span class="nav-icon">▦</span> Empresas
-        </button>
-        <button data-section="catalogos">
-          <span class="nav-icon">▤</span> Catálogos
-        </button>
-        <button data-section="contratos">
-          <span class="nav-icon">▧</span> Contratos
-        </button>
-        <button data-section="pagos">
-          <span class="nav-icon">$</span> Pagos y mensualidades
-        </button>
-        <button data-section="finanzas">
-          <span class="nav-icon">◫</span> Finanzas
-        </button>
-        <button data-section="usuarios">
-          <span class="nav-icon">♙</span> Usuarios y permisos
-        </button>
-        <button data-section="historial">
-          <span class="nav-icon">◷</span> Historial
-        </button>
+        <button class="active" data-section="inicio"><span class="nav-icon">⌂</span> Inicio</button>
+        <button data-section="empresas"><span class="nav-icon">▦</span> Empresas</button>
+        <button data-section="catalogos"><span class="nav-icon">▤</span> Catálogos</button>
+        <button data-section="contratos"><span class="nav-icon">▧</span> Contratos</button>
+        <button data-section="pagos"><span class="nav-icon">$</span> Pagos y mensualidades</button>
+        <button data-section="finanzas"><span class="nav-icon">◫</span> Finanzas</button>
+        <button data-section="usuarios"><span class="nav-icon">♙</span> Usuarios y permisos</button>
+        <button data-section="historial"><span class="nav-icon">◷</span> Historial</button>
       </nav>
 
       <div class="sidebar-bottom">
@@ -571,7 +479,6 @@
           <h2 id="pageTitle">Panel principal</h2>
           <p>Centro de control de la plataforma</p>
         </div>
-
         <div class="top-actions">
           <div class="status">
             <span class="status-dot" id="ccPuntoEstado"></span>
@@ -584,11 +491,7 @@
       <div class="content" id="content">
         <section class="welcome">
           <h3>Bienvenida a CLICK COMMERCE</h3>
-          <p>
-            Administra desde un solo lugar las empresas, sus catálogos,
-            los servicios contratados y el control de pagos.
-            Esta plataforma está diseñada para crecer contigo.
-          </p>
+          <p>Administra desde un solo lugar las empresas, sus catálogos, los servicios contratados y el control de pagos. Esta plataforma está diseñada para crecer contigo.</p>
         </section>
 
         <div class="section-heading">
@@ -600,37 +503,22 @@
 
         <div class="cards">
           <article class="stat-card">
-            <div class="stat-top">
-              <span class="stat-title">Empresas registradas</span>
-              <span class="stat-icon">▦</span>
-            </div>
+            <div class="stat-top"><span class="stat-title">Empresas registradas</span><span class="stat-icon">▦</span></div>
             <div class="stat-value">Por conectar</div>
             <div class="stat-note">Datos de Supabase</div>
           </article>
-
           <article class="stat-card">
-            <div class="stat-top">
-              <span class="stat-title">Catálogos activos</span>
-              <span class="stat-icon">▤</span>
-            </div>
+            <div class="stat-top"><span class="stat-title">Catálogos activos</span><span class="stat-icon">▤</span></div>
             <div class="stat-value">Por conectar</div>
             <div class="stat-note">Datos de Supabase</div>
           </article>
-
           <article class="stat-card">
-            <div class="stat-top">
-              <span class="stat-title">Pagos pendientes</span>
-              <span class="stat-icon">$</span>
-            </div>
+            <div class="stat-top"><span class="stat-title">Pagos pendientes</span><span class="stat-icon">$</span></div>
             <div class="stat-value">Por conectar</div>
             <div class="stat-note">Control de vencimientos</div>
           </article>
-
           <article class="stat-card">
-            <div class="stat-top">
-              <span class="stat-title">Ingresos registrados</span>
-              <span class="stat-icon">◫</span>
-            </div>
+            <div class="stat-top"><span class="stat-title">Ingresos registrados</span><span class="stat-icon">◫</span></div>
             <div class="stat-value">Por conectar</div>
             <div class="stat-note">Resumen financiero</div>
           </article>
@@ -650,42 +538,36 @@
             <p>Registrar empresas, actualizar sus datos y controlar su estado.</p>
             <button data-open="empresas">Abrir sección →</button>
           </article>
-
           <article class="module">
             <div class="module-icon">▤</div>
             <h4>Catálogos y servicios</h4>
             <p>Gestionar catálogos, servicios contratados y su publicación.</p>
             <button data-open="catalogos">Abrir sección →</button>
           </article>
-
           <article class="module">
             <div class="module-icon">▧</div>
             <h4>Contratos</h4>
             <p>Consultar condiciones comerciales, entregas y acuerdos.</p>
             <button data-open="contratos">Abrir sección →</button>
           </article>
-
           <article class="module">
             <div class="module-icon">$</div>
             <h4>Pagos y mensualidades</h4>
             <p>Controlar anticipos, saldos, vencimientos y mensualidades.</p>
             <button data-open="pagos">Abrir sección →</button>
           </article>
-
           <article class="module">
             <div class="module-icon">◫</div>
             <h4>Finanzas</h4>
             <p>Organizar ingresos, gastos, resultados y reportes financieros.</p>
             <button data-open="finanzas">Abrir sección →</button>
           </article>
-
           <article class="module">
             <div class="module-icon">♙</div>
             <h4>Usuarios y permisos</h4>
             <p>Administrar accesos y permisos para empresas y colaboradores.</p>
             <button data-open="usuarios">Abrir sección →</button>
           </article>
-
           <article class="module">
             <div class="module-icon">◷</div>
             <h4>Historial de movimientos</h4>
@@ -697,12 +579,10 @@
         <div class="notice">
           <strong>Estado de la plataforma:</strong>
           la sesión y el rol se verifican antes de mostrar el panel.
-          Los módulos de gestión todavía se conectarán individualmente.
+          El módulo Empresas está conectado a Supabase.
         </div>
 
-        <div class="footer">
-          © 2026 CLICK COMMERCE · Plataforma de gestión empresarial
-        </div>
+        <div class="footer">© 2026 CLICK COMMERCE · Plataforma de gestión empresarial</div>
       </div>
     </main>
   </div>
@@ -720,6 +600,10 @@
       const botonVolver = document.getElementById("ccVolverAcceso");
       const aplicacion = document.getElementById("ccAplicacion");
 
+      let sesionActual = null;
+      let usuarioActual = null;
+      let empresasCache = [];
+
       const titulos = {
         inicio: "Panel principal",
         empresas: "Gestión de empresas",
@@ -732,212 +616,459 @@
       };
 
       const descripciones = {
-        empresas:
-          "Aquí prepararemos el registro, la edición y el seguimiento de las empresas que administras.",
-        catalogos:
-          "Aquí organizaremos los catálogos, los servicios contratados y el estado de cada proyecto.",
-        contratos:
-          "Aquí registraremos las condiciones acordadas, las fechas de entrega y la aprobación del catálogo.",
-        pagos:
-          "Aquí controlaremos el anticipo, el saldo de entrega y las mensualidades a partir de la entrega y aprobación del catálogo, según las reglas comerciales acordadas.",
-        finanzas:
-          "Aquí prepararemos los ingresos, gastos, resultados y reportes financieros de CLICK COMMERCE.",
-        usuarios:
-          "Aquí administraremos las cuentas, los roles y los permisos de cada empresa y colaborador.",
-        historial:
-          "Aquí consultaremos quién realizó cada cambio y cuándo se hizo."
+        catalogos: "Aquí organizaremos los catálogos y servicios contratados.",
+        contratos: "Aquí registraremos las condiciones comerciales, fechas de entrega y acuerdos.",
+        pagos: "Aquí controlaremos anticipos, saldos y mensualidades conforme a las reglas comerciales.",
+        finanzas: "Aquí prepararemos ingresos, gastos, resultados y reportes financieros.",
+        usuarios: "Aquí administraremos cuentas, roles y permisos.",
+        historial: "Aquí consultaremos los cambios y movimientos registrados."
       };
 
       function mostrarError(mensaje, permitirReintento = true) {
         aplicacion.hidden = true;
         guardia.hidden = false;
-
         mensajeGuardia.className = "guardia-mensaje guardia-error";
         mensajeGuardia.textContent = mensaje;
-
         botonReintentar.hidden = !permitirReintento;
         botonVolver.hidden = false;
+      }
+
+      function escapar(valor) {
+        return String(valor ?? "").replace(/[&<>"']/g, caracter => ({
+          "&": "&amp;",
+          "<": "&lt;",
+          ">": "&gt;",
+          '"': "&quot;",
+          "'": "&#39;"
+        })[caracter]);
+      }
+
+      async function consultarSupabase(ruta, opciones = {}) {
+        if (!sesionActual?.access_token) {
+          throw new Error("Tu sesión no está disponible. Inicia sesión nuevamente.");
+        }
+
+        const respuesta = await fetch(`${SUPABASE_URL}${ruta}`, {
+          ...opciones,
+          headers: {
+            "apikey": SUPABASE_KEY,
+            "Authorization": `Bearer ${sesionActual.access_token}`,
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            ...(opciones.headers || {})
+          }
+        });
+
+        if (!respuesta.ok) {
+          const detalle = await respuesta.text();
+          let mensaje = detalle;
+
+          try {
+            const datos = JSON.parse(detalle);
+            mensaje = datos.message || datos.msg || datos.details || detalle;
+          } catch {}
+
+          if (respuesta.status === 401) {
+            throw new Error("Tu sesión venció o no es válida. Inicia sesión nuevamente.");
+          }
+
+          if (respuesta.status === 403) {
+            throw new Error("Supabase rechazó la operación por permisos. No se modificó la información.");
+          }
+
+          throw new Error(`Error de Supabase (HTTP ${respuesta.status}): ${mensaje.slice(0, 350)}`);
+        }
+
+        if (respuesta.status === 204) return null;
+
+        const texto = await respuesta.text();
+        return texto ? JSON.parse(texto) : null;
+      }
+
+      function crearPie() {
+        const pie = document.createElement("div");
+        pie.className = "footer";
+        pie.textContent = "© 2026 CLICK COMMERCE · Gestión empresarial";
+        return pie;
+      }
+
+      function mostrarInicio() {
+        location.reload();
       }
 
       function mostrarSeccion(seccion) {
         if (!titulos[seccion]) return;
 
-        const contenido = document.getElementById("content");
         document.getElementById("pageTitle").textContent = titulos[seccion];
 
         document.querySelectorAll("#menu button").forEach(boton => {
-          boton.classList.toggle(
-            "active",
-            boton.dataset.section === seccion
-          );
+          boton.classList.toggle("active", boton.dataset.section === seccion);
         });
 
         if (seccion === "inicio") {
-          location.reload();
+          mostrarInicio();
           return;
         }
 
+        const contenido = document.getElementById("content");
+        const panel = document.createElement("section");
+        panel.className = "placeholder";
+
         const titulo = document.createElement("h3");
         titulo.textContent = titulos[seccion];
+        panel.appendChild(titulo);
 
         const descripcion = document.createElement("p");
-        descripcion.textContent = descripciones[seccion];
+        descripcion.textContent = seccion === "empresas"
+          ? "Registra, consulta y actualiza las empresas que administras."
+          : (descripciones[seccion] || "");
+        panel.appendChild(descripcion);
+
+        contenido.replaceChildren(panel, crearPie());
+
+        if (seccion === "empresas") {
+          cargarEmpresas(panel);
+          return;
+        }
 
         const aviso = document.createElement("p");
-        aviso.textContent =
-          "Esta sección todavía no está conectada a la base de datos. " +
-          "La habilitaremos paso a paso, con los permisos adecuados.";
+        aviso.textContent = "Este módulo se conectará paso a paso, manteniendo los permisos de acceso.";
+        panel.appendChild(aviso);
 
         const volver = document.createElement("button");
         volver.className = "back-home";
         volver.textContent = "Volver al panel principal";
-        volver.addEventListener("click", () => location.reload());
+        volver.addEventListener("click", mostrarInicio);
+        panel.appendChild(volver);
+      }
 
-        const panel = document.createElement("section");
-        panel.className = "placeholder";
-        panel.append(titulo, descripcion, aviso, volver);
+      async function cargarEmpresas(panel) {
+        panel.innerHTML = `
+          <h3>Gestión de empresas</h3>
+          <p>Registra y administra las empresas clientes de CLICK COMMERCE.</p>
+          <div id="ccEmpresaMensaje" class="cc-mensaje info" role="status" aria-live="polite">
+            Cargando empresas desde Supabase...
+          </div>
+          <div id="ccEmpresaContenido"></div>
+        `;
 
-        const pie = document.createElement("div");
-        pie.className = "footer";
-        pie.textContent =
-          "© 2026 CLICK COMMERCE · Gestión empresarial";
+        try {
+          empresasCache = await consultarSupabase(
+            "/rest/v1/empresas?select=id,nombre_comercial,razon_social,nit,email,telefono,whatsapp,direccion,estado,fecha_registro&order=fecha_registro.desc"
+          );
 
-        contenido.replaceChildren(panel, pie);
+          if (!Array.isArray(empresasCache)) {
+            throw new Error("Supabase no devolvió una lista válida de empresas.");
+          }
+
+          dibujarEmpresas(panel);
+        } catch (error) {
+          const mensaje = panel.querySelector("#ccEmpresaMensaje");
+          const contenido = panel.querySelector("#ccEmpresaContenido");
+
+          if (mensaje) {
+            mensaje.className = "cc-mensaje error";
+            mensaje.textContent = error.message;
+          }
+
+          if (contenido) {
+            const reintentar = document.createElement("button");
+            reintentar.type = "button";
+            reintentar.className = "back-home";
+            reintentar.textContent = "Volver a cargar";
+            reintentar.addEventListener("click", () => cargarEmpresas(panel));
+            contenido.appendChild(reintentar);
+          }
+        }
+      }
+
+      function dibujarEmpresas(panel) {
+        const mensaje = panel.querySelector("#ccEmpresaMensaje");
+        const contenido = panel.querySelector("#ccEmpresaContenido");
+        if (!mensaje || !contenido) return;
+
+        mensaje.className = "cc-mensaje ok";
+        mensaje.textContent = `Conexión correcta. Empresas encontradas: ${empresasCache.length}`;
+
+        contenido.innerHTML = `
+          <div style="display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;margin:20px 0;">
+            <h3 style="margin:0;">Empresas registradas</h3>
+            <button type="button" class="back-home" id="ccNuevaEmpresa">+ Registrar empresa</button>
+          </div>
+          <div id="ccFormularioEmpresa"></div>
+          <div id="ccTablaEmpresas"></div>
+        `;
+
+        const tabla = contenido.querySelector("#ccTablaEmpresas");
+
+        if (empresasCache.length === 0) {
+          tabla.innerHTML = `
+            <div style="padding:18px;border:1px solid #DCE2EA;border-radius:8px;background:#F8FAFC;">
+              Todavía no hay empresas registradas. Puedes registrar la primera.
+            </div>
+          `;
+        } else {
+          tabla.innerHTML = `
+            <div class="cc-tabla-contenedor">
+              <table class="cc-tabla">
+                <thead>
+                  <tr>
+                    <th>Empresa</th>
+                    <th>NIT</th>
+                    <th>Contacto</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${empresasCache.map(empresa => `
+                    <tr>
+                      <td>
+                        <strong>${escapar(empresa.nombre_comercial)}</strong>
+                        <div style="font-size:13px;color:#738096;margin-top:4px;">
+                          ${escapar(empresa.razon_social || "Sin razón social")}
+                        </div>
+                      </td>
+                      <td>${escapar(empresa.nit || "—")}</td>
+                      <td>
+                        ${escapar(empresa.telefono || empresa.whatsapp || "—")}
+                        <div style="font-size:13px;color:#738096;margin-top:4px;">
+                          ${escapar(empresa.email || "")}
+                        </div>
+                      </td>
+                      <td>${escapar(empresa.estado || "pendiente")}</td>
+                      <td>
+                        <button type="button" class="cc-boton-secundario"
+                          data-editar="${escapar(empresa.id)}">Editar</button>
+                      </td>
+                    </tr>
+                  `).join("")}
+                </tbody>
+              </table>
+            </div>
+          `;
+        }
+
+        contenido.querySelector("#ccNuevaEmpresa").addEventListener("click", () => {
+          mostrarFormulario(panel, null);
+        });
+
+        contenido.querySelectorAll("[data-editar]").forEach(boton => {
+          boton.addEventListener("click", () => {
+            const empresa = empresasCache.find(
+              item => String(item.id) === boton.dataset.editar
+            );
+            if (empresa) mostrarFormulario(panel, empresa);
+          });
+        });
+      }
+
+      function mostrarFormulario(panel, empresa) {
+        const zona = panel.querySelector("#ccFormularioEmpresa");
+        if (!zona) return;
+
+        const editando = Boolean(empresa);
+
+        zona.innerHTML = `
+          <form id="ccFormulario" style="margin:15px 0 24px;padding:20px;border:1px solid #DCE2EA;border-radius:10px;background:#F8FAFC;">
+            <h3 style="margin-top:0;">${editando ? "Editar empresa" : "Registrar nueva empresa"}</h3>
+
+            <div class="cc-form-grid">
+              <label class="cc-campo">Nombre comercial *
+                <input name="nombre_comercial" required maxlength="180"
+                  value="${escapar(empresa?.nombre_comercial)}">
+              </label>
+
+              <label class="cc-campo">Razón social
+                <input name="razon_social" maxlength="200"
+                  value="${escapar(empresa?.razon_social)}">
+              </label>
+
+              <label class="cc-campo">NIT
+                <input name="nit" maxlength="40"
+                  value="${escapar(empresa?.nit)}">
+              </label>
+
+              <label class="cc-campo">Correo electrónico
+                <input name="email" type="email" maxlength="180"
+                  value="${escapar(empresa?.email)}">
+              </label>
+
+              <label class="cc-campo">Teléfono
+                <input name="telefono" maxlength="40"
+                  value="${escapar(empresa?.telefono)}">
+              </label>
+
+              <label class="cc-campo">WhatsApp
+                <input name="whatsapp" maxlength="40"
+                  value="${escapar(empresa?.whatsapp)}">
+              </label>
+
+              <label class="cc-campo">Dirección
+                <input name="direccion" maxlength="250"
+                  value="${escapar(empresa?.direccion)}">
+              </label>
+
+              <label class="cc-campo">Estado
+                <select name="estado">
+                  <option value="pendiente" ${!empresa || empresa.estado === "pendiente" ? "selected" : ""}>Pendiente</option>
+                  <option value="activa" ${empresa?.estado === "activa" ? "selected" : ""}>Activa</option>
+                  <option value="suspendida" ${empresa?.estado === "suspendida" ? "selected" : ""}>Suspendida</option>
+                </select>
+              </label>
+            </div>
+
+            <div id="ccGuardarMensaje" class="cc-mensaje info" role="status" aria-live="polite"></div>
+
+            <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:12px;">
+              <button type="submit" class="back-home" id="ccGuardarEmpresa">
+                ${editando ? "Guardar cambios" : "Registrar empresa"}
+              </button>
+              <button type="button" class="logout" id="ccCancelarEmpresa">Cancelar</button>
+            </div>
+          </form>
+        `;
+
+        const formulario = zona.querySelector("#ccFormulario");
+        const botonGuardar = zona.querySelector("#ccGuardarEmpresa");
+        const mensaje = zona.querySelector("#ccGuardarMensaje");
+
+        zona.querySelector("#ccCancelarEmpresa").addEventListener("click", () => {
+          zona.replaceChildren();
+        });
+
+        formulario.addEventListener("submit", async evento => {
+          evento.preventDefault();
+          botonGuardar.disabled = true;
+          mensaje.className = "cc-mensaje info";
+          mensaje.textContent = "Guardando en Supabase...";
+
+          const formularioDatos = new FormData(formulario);
+          const datos = {};
+
+          [
+            "nombre_comercial", "razon_social", "nit", "email",
+            "telefono", "whatsapp", "direccion", "estado"
+          ].forEach(campo => {
+            datos[campo] = String(formularioDatos.get(campo) || "").trim();
+          });
+
+          if (!datos.nombre_comercial) {
+            mensaje.className = "cc-mensaje error";
+            mensaje.textContent = "El nombre comercial es obligatorio.";
+            botonGuardar.disabled = false;
+            return;
+          }
+
+          try {
+            if (editando) {
+              await consultarSupabase(
+                `/rest/v1/empresas?id=eq.${encodeURIComponent(empresa.id)}`,
+                {
+                  method: "PATCH",
+                  headers: { "Prefer": "return=minimal" },
+                  body: JSON.stringify(datos)
+                }
+              );
+            } else {
+              datos.creado_por = usuarioActual.id;
+
+              await consultarSupabase("/rest/v1/empresas", {
+                method: "POST",
+                headers: { "Prefer": "return=minimal" },
+                body: JSON.stringify(datos)
+              });
+            }
+
+            await cargarEmpresas(panel);
+          } catch (error) {
+            mensaje.className = "cc-mensaje error";
+            mensaje.textContent = error.message;
+            botonGuardar.disabled = false;
+          }
+        });
       }
 
       async function verificarAcceso() {
         botonReintentar.disabled = true;
         botonReintentar.hidden = true;
         botonVolver.hidden = true;
-
         guardia.hidden = false;
         aplicacion.hidden = true;
 
         mensajeGuardia.className = "guardia-mensaje";
-        mensajeGuardia.textContent =
-          "Verificando tu sesión y los permisos de acceso...";
+        mensajeGuardia.textContent = "Verificando tu sesión y los permisos de acceso...";
 
         try {
           const guardado = sessionStorage.getItem("clickCommerceSession");
 
           if (!guardado) {
-            throw new Error(
-              "No se encontró una sesión. Vuelve al acceso e inicia sesión."
-            );
+            throw new Error("No se encontró una sesión. Vuelve al acceso e inicia sesión.");
           }
-
-          let sesion;
 
           try {
-            sesion = JSON.parse(guardado);
+            sesionActual = JSON.parse(guardado);
           } catch {
-            throw new Error(
-              "La sesión guardada no se puede leer. Vuelve al acceso e inicia sesión."
-            );
+            throw new Error("La sesión guardada no se puede leer. Vuelve al acceso.");
           }
 
-          if (!sesion || !sesion.access_token) {
-            throw new Error(
-              "La sesión no contiene un token de acceso válido."
-            );
+          if (!sesionActual?.access_token) {
+            throw new Error("La sesión no contiene un token válido. Vuelve al acceso.");
           }
 
-          // Paso 1: validar el token con el servicio de autenticación.
-          const respuestaUsuario = await fetch(
-            `${SUPABASE_URL}/auth/v1/user`,
-            {
-              method: "GET",
-              headers: {
-                "apikey": SUPABASE_KEY,
-                "Authorization": `Bearer ${sesion.access_token}`
-              }
+          const respuestaUsuario = await fetch(`${SUPABASE_URL}/auth/v1/user`, {
+            method: "GET",
+            headers: {
+              "apikey": SUPABASE_KEY,
+              "Authorization": `Bearer ${sesionActual.access_token}`
             }
-          );
+          });
 
           if (!respuestaUsuario.ok) {
-            throw new Error(
-              "La sesión ha vencido o no es válida. Vuelve al acceso e inicia sesión nuevamente."
-            );
+            throw new Error("La sesión venció o no es válida. Inicia sesión nuevamente.");
           }
 
-          const usuario = await respuestaUsuario.json();
+          usuarioActual = await respuestaUsuario.json();
 
-          if (!usuario || !usuario.id) {
-            throw new Error(
-              "Supabase no devolvió la identidad del usuario autenticado."
-            );
+          if (!usuarioActual?.id) {
+            throw new Error("No se pudo verificar la identidad del usuario.");
           }
 
-          // Paso 2: comprobar el rol usando la función de la base de datos.
-          const respuestaRol = await fetch(
-            `${SUPABASE_URL}/rest/v1/rpc/cc_es_superadmin`,
-            {
-              method: "POST",
-              headers: {
-                "apikey": SUPABASE_KEY,
-                "Authorization": `Bearer ${sesion.access_token}`,
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-              },
-              body: "{}"
-            }
+          const respuestaRol = await consultarSupabase(
+            "/rest/v1/rpc/cc_es_superadmin",
+            { method: "POST", body: "{}" }
           );
 
-          if (!respuestaRol.ok) {
-            const detalle = await respuestaRol.text();
-
-            throw new Error(
-              `No se pudo verificar el rol (HTTP ${respuestaRol.status}). ` +
-              `${detalle.slice(0, 220)}`
-            );
-          }
-
-          const esSuperadmin = await respuestaRol.json();
-
-          if (esSuperadmin !== true) {
+          if (respuestaRol !== true) {
             mostrarError(
-              "La sesión es válida, pero Supabase no reconoce este perfil como superadministradora. No se habilitó el panel. Revisaremos los permisos antes de continuar.",
+              "Supabase no reconoce esta sesión como superadministradora. El panel permanecerá bloqueado.",
               false
             );
             return;
           }
 
-          // Solo se muestra el panel cuando ambas comprobaciones funcionan.
           document.getElementById("ccIdentidad").textContent =
-            usuario.email || "Usuario autenticado";
-
-          document.getElementById("ccNombreRol").textContent =
-            "Superadministradora";
-
-          document.getElementById("ccEstadoPanel").textContent =
-            "Acceso verificado";
-
+            usuarioActual.email || "Usuario autenticado";
+          document.getElementById("ccNombreRol").textContent = "Superadministradora";
+          document.getElementById("ccEstadoPanel").textContent = "Acceso verificado";
           document.getElementById("ccPuntoEstado").classList.add("ok");
 
           guardia.hidden = true;
           aplicacion.hidden = false;
 
         } catch (error) {
-          mostrarError(
-            error && error.message
-              ? error.message
-              : "Ocurrió un error inesperado al verificar el acceso."
-          );
+          mostrarError(error.message || "No se pudo verificar el acceso.");
         } finally {
           botonReintentar.disabled = false;
         }
       }
 
       document.querySelectorAll("#menu button").forEach(boton => {
-        boton.addEventListener("click", () => {
-          mostrarSeccion(boton.dataset.section);
-        });
+        boton.addEventListener("click", () => mostrarSeccion(boton.dataset.section));
       });
 
       document.querySelectorAll("[data-open]").forEach(boton => {
-        boton.addEventListener("click", () => {
-          mostrarSeccion(boton.dataset.open);
-        });
+        boton.addEventListener("click", () => mostrarSeccion(boton.dataset.open));
       });
 
       document.getElementById("logout").addEventListener("click", () => {
